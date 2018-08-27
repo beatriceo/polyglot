@@ -1,2 +1,18 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Action Cable Signaling Server</h1>
+
+<div>Random User ID:
+  <span id="current-user"><%= rand(0..10000) %></span>
+</div>
+
+<div id="remote-video-container"></div>
+<video id="local-video" autoplay></video>
+
+<hr />
+
+<button onclick="handleJoinSession()">
+  Join Room
+</button>
+
+<button onclick="handleLeaveSession()">
+  Leave Room
+</button>
