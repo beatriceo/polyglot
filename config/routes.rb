@@ -4,7 +4,15 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/logout', to: 'devise/sessions#destroy'
   end
-  root to: 'pages#home'
+
+  authenticated :user do
+    root to: "pages#index"
+  end
+
+  unauthenticated :user do
+    root to: "pages#home"
+  end
+
   get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
 
