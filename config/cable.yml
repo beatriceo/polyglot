@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: ${REDISTOGO_URL}
+  url: redis://redistogo:a0f2bf8d959875c205b419078aa8b71b@soapfish.redistogo.com:9517/
   channel_prefix: polyglot_production
