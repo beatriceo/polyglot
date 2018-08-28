@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get 'video_sessions/create'
   devise_for :users
-  root to: 'pages#home'
-
+  root to: 'pages#call'
+  get '/contacts', to: 'users#index'
   post '/sessions', to: 'video_sessions#create'
 
   mount ActionCable.server, at: '/cable'
