@@ -4,3 +4,31 @@ video {
   -webkit-transform:rotateY(180deg); /* Safari and Chrome */
   -moz-transform:rotateY(180deg); /* Firefox */
 }
+
+#remote-video-container {
+  float: left;
+}
+
+#local-video {
+  width: 100vw;
+  transition: all 1s ease-out;
+}
+
+#local-video.video-sm {
+  width: 200px;
+}
+
+#video_overlays {
+  position: absolute;
+  float: left;
+  z-index: 300000;
+  // display: flex;
+  // justify-content: center;
+}
+
+.call-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
