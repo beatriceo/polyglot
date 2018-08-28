@@ -1,13 +1,40 @@
-<h1>Action Cable Signaling Server</h1>
 
-<div>Random User ID:
-  <span id="current-user"><%= rand(0..10000) %></span>
+
+<div class="call-container">
+  <div id="remote-video-container">
+    <div id="video_overlays">
+      <video id="local-video" autoplay></video>
+    </div>
+  </div>
 </div>
 
-<div id="remote-video-container"></div>
-<video id="local-video" autoplay></video>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <hr />
+<div>
+  <span class="text-color" style="display:none">Random User ID:</span>
+  <span id="current-user" class="text-color" style="display:none"><%= rand(0..10000) %></span>
+</div>
 
 <button onclick="handleJoinSession()">
   Join Room
