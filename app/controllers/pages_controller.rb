@@ -3,4 +3,7 @@ class PagesController < ApplicationController
 
   def call
   end
+
+  def home
+  end
 end
