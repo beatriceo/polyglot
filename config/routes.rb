@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy'
   end
   root to: 'pages#home'
-  get '/contacts', to: 'users#index'
+  get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
 
   mount ActionCable.server, at: '/cable'
