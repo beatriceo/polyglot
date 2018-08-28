@@ -4,6 +4,9 @@ class PagesController < ApplicationController
   def call
   end
 
+  def index
+  end
+
   def home
   end
 end
