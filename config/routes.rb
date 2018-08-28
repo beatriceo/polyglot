@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     root to: "pages#home"
   end
 
+  get '/call', to: 'pages#call'
+
   get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
 
