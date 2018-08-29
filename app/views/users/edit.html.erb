@@ -1,0 +1,32 @@
+<div class="profile-container">
+  <%= simple_form_for(@user) do |t| %>
+    <div class="profile-form">
+      <div>
+        <%= t.input :email  %>
+        <%= t.input :first_name %>
+        <%= t.input :last_name %>
+        <%= t.input :photo %>
+        <%= t.input :password %>
+
+        <%= t.submit :Save, class: "btn btn-primary save-btn form-control" %>
+        <p></p>
+        <%= link_to "View my profile", user_path(@user), class: "btn btn-primary save-btn form-control" %>
+      </div>
+
+
+      <div class="profile-pic">
+        <% if @user.photo.nil? %>
+          <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"%>
+        <% else %>
+          <%= cl_image_tag current_user.photo%>
+        <% end %>
+
+        <%= t.input_field :photo, onchange: 'this.form.submit();' %>
+        <%= t.input_field :photo, as: :hidden %>
+
+      </div>
+
+    </div>
+  <% end %>
+</div>
+
