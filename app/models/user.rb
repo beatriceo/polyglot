@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :connections
 
+  mount_uploader :photo, PhotoUploader
+
   def contacts
     self.connections.map do |connection|
       connection.contact
