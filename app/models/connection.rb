@@ -8,7 +8,7 @@ class Connection < ApplicationRecord
 
   def create_inverted_connection
     unless Connection.where('user_id = ? and contact_id = ?', self.contact.id, self.user.id).length > 0
-      Connection.create!(user: self.contact, contact: self.user)
+      inverted = Connection.create!(user: self.contact, contact: self.user)
     end
   end
 end

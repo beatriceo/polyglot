@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :connections
+  has_many :chat_rooms, through: :chat_room_participations
+  has_many :chat_room_participations
+  has_many :requests
 
   def contacts
     self.connections.map do |connection|
