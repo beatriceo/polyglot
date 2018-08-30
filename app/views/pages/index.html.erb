@@ -15,6 +15,12 @@
 </div>
 
 <div id="my-user-id" data-user-id="<%= current_user.id %>"></div>
+
+<form action="/accept_call" method="post">
+  <input type="hidden" id="chat-room-id" name="chat_room_id" value=""/>
+  <input type="submit" id="accept-button" class="btn btn-primary" id="accept-button" style="display: none;" value="ACCEPT CALL"/>
+</form>
+
 <%= javascript_pack_tag 'notifications' %>
 
-<button class="btn btn-primary" id="accept-button" style="display: none;">ACCEPT CALL</button>
+

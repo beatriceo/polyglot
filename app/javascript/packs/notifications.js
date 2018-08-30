@@ -10,6 +10,8 @@ import ActionCable from 'actioncable'
 
 
 const userId = parseInt(document.getElementById("my-user-id").dataset["userId"])
+let chatRoomId = null
+
 
 App.cable.subscriptions.create({
   channel: 'NotificationsChannel'
@@ -18,9 +20,13 @@ App.cable.subscriptions.create({
     console.log('Connected to NotificationsChannel')
   },
   received: data => {
-    console.log(data["message"]["user_id"])
-    console.log(userId)
-    if (data["message"]["user_id"] === userId) {
+    // console.log(data["message"]["user_id"])
+    // console.log(userId)
+    console.log("received broadcast")
+    // console.log(data.body)
+    if (data.head === 302 && data.body["caller"] === userId && data.path ) {
+      window.location.pathname = data.path
+    } else if (data["message"]["user_id"] === userId) {
       console.log("TRIGGER MODAL")
       const acceptButton = document.getElementById('accept-button')
       acceptButton.style.display = "block"
@@ -31,8 +37,20 @@ App.cable.subscriptions.create({
 
       // const calleeModal = document.getElementById('calleeModal')
       // calleeModal.modal("show")
-
-      console.log(`user with id: ${userId} needs to subscribe to chatroom ${data["message"]["chat_room_id"]}`)
+      chatRoomId = data["message"]["chat_room_id"]
+      console.log(`user with id: ${userId} needs to subscribe to chatroom ${[chatRoomId]}`)
+    } else {
+      console.log(data)
     }
+
+
   }
+})
+
+
+const acceptButton = document.getElementById('accept-button')
+
+acceptButton.addEventListener('click', event => {
+  // event.preventDefault()
+  document.getElementById('chat-room-id').value = chatRoomId
 })

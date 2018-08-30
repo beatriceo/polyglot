@@ -17,6 +17,10 @@ Rails.application.routes.draw do
 
   get '/establish_call/:contact_id', to: 'pages#establish_call', as: 'establish_call'
 
+  post '/accept_call', to: 'pages#accept_call', as: 'accept_call/'
+
+  patch '/accept_call/:request_id', to: 'requests#update', as: 'update_request'
+
   get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
 
