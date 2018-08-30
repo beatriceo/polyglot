@@ -5,11 +5,28 @@
 
   <div class="right-align">
     <div class="links">
-      <div class="active"><%= link_to "Dashboard", "#" %></div>
+      <div class="active"><%= link_to "Dashboard", contacts_path %></div>
       <div><%= link_to "Settings", "#" %></div>
     </div>
     <div class="profile">
-      <%= image_tag "https://avatars2.githubusercontent.com/u/38472180?v=4", class: "img-circle"%>
+    <% if current_user.nil? %>
+      <%= link_to "Login", new_user_session_path  %>
+    <% else %>
+      <div class="dropdown">
+        <div data-toggle="dropdown">
+          <% if current_user.photo.url.nil? %>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar dropdown-toggle img-circle">
+          <% else %>
+            <%= cl_image_tag current_user.photo, class: "avatar dropdown-toggle img-circle"%>
+          <% end %>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <!-- <li><a href="#">Profile</a></li> -->
+          <li><%= link_to "Profile", user_path(current_user) %></li>
+          <li><%= link_to "Logout", destroy_user_session_path %></li>
+        </ul>
+      </div>
+    <% end %>
     </div>
   </div>
 </div>

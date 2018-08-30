@@ -1,0 +1,51 @@
+.user-container {
+  margin: 0 1in;
+  height: calc(100vh - 4.5em); //4.5em is height of navbar.
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    font-size: 1.5em;
+  }
+  .profile {
+    background: #33333D;
+    display: flex;
+
+    .flex-end {
+      margin-left: auto;
+      display:flex;
+      align-items: center;
+
+      a:first-child {
+        margin-right: .5em;
+      }
+    }
+    .profile-pic {
+      display: flex;
+      align-items: center;
+      margin-right: 3em;
+      img {
+        width: 10em;
+      }
+    }
+
+    .profile-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      h1 {
+        margin: 0 0 .5em 0 ;
+      }
+      h2 {
+        margin: 0;
+      }
+      .italics {
+        font-style: italic;
+        color: white;
+      }
+    }
+  }
+
+  }
+

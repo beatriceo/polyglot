@@ -34,4 +34,10 @@ Rails.application.routes.draw do
   mount ActionCable.server, at: '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/home', to: 'pages#home'
+
+
+  get '/users/:id', to: 'users#show', as: :user
+  get '/users/:id/edit', to: 'users#edit', as: :user_edit
+  patch '/users/:id', to: 'users#update'
+  delete '/users/:id', to: 'users#destroy'
 end
