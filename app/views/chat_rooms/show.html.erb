@@ -1,0 +1,21 @@
+<button onclick="handleJoinSession()" data-room="<%= @chat_room.id %>">Join Room</button>
+
+<h1 style="color: white;">This is chatroom #<%= @chat_room.id %></h1>
+<div id="chatroom-hook" data-chatroom-id='<%= @chat_room.id %>'></div>
+
+<button id="test-btn">Test Connection</button>
+<div class="call-container">
+  <div id="remote-video-container">
+    <div id="video_overlays">
+      <video id="local-video" autoplay></video>
+    </div>
+  </div>
+</div>
+
+<div>
+  <span class="text-color" style="display:none">Random User ID:</span>
+  <span id="current-user" class="text-color" style="display:none"><%= current_user.id %></span>
+</div>
+
+
+<%= javascript_pack_tag 'chatrooms' %>

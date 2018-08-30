@@ -1,7 +1,6 @@
 class RequestsController < ApplicationController
 
-  def update
-    request.accepted = true
+  def accept
 
     # Create new Chat Room
   end

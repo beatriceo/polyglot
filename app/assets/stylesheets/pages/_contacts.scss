@@ -50,6 +50,10 @@ a:hover {
       color: $icon;
       font-size: 25px;
     }
+    button {
+      height: 0;
+      width: 0;
+    }
   }
 
 }
