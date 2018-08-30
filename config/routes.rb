@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'video_sessions/create'
+
   devise_for :users, path: '', path_names: { sign_out: 'logout'}
   devise_scope :user do
     get '/logout', to: 'devise/sessions#destroy'
@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
+
+  post '/chat_rooms/chat_room_sessions', to: 'chat_rooms#create'
 
   resources :chat_rooms, only: [ :show ] do
     # testing action cable

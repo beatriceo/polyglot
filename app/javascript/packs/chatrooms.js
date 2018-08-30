@@ -17,10 +17,8 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
   room: chatroomId
 }, {
   connected: () => {
-    console.log('Connected to ChatRoom ' + chatroomId)
   },
   received: data => {
-    console.log(data)
   }
 })
 
