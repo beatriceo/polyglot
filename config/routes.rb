@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'video_sessions/create'
+
   devise_for :users, path: '', path_names: { sign_out: 'logout'}
   devise_scope :user do
     get '/logout', to: 'devise/sessions#destroy'
@@ -15,8 +15,21 @@ Rails.application.routes.draw do
 
   get '/call', to: 'pages#call'
 
+  get '/establish_call/:contact_id', to: 'pages#establish_call', as: 'establish_call'
+
+  post '/accept_call', to: 'pages#accept_call', as: 'accept_call/'
+
+  patch '/accept_call/:request_id', to: 'requests#update', as: 'update_request'
+
   get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
+
+  post '/chat_rooms/chat_room_sessions', to: 'chat_rooms#create'
+
+  resources :chat_rooms, only: [ :show ] do
+    # testing action cable
+    post '/cable_testing', to: 'pages#cable_testing'
+  end
 
   mount ActionCable.server, at: '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
