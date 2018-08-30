@@ -15,8 +15,15 @@ Rails.application.routes.draw do
 
   get '/call', to: 'pages#call'
 
+  get '/establish_call/:contact_id', to: 'pages#establish_call', as: 'establish_call'
+
   get '/contacts', to: 'pages#index'
   post '/sessions', to: 'video_sessions#create'
+
+  resources :chat_rooms, only: [ :show ] do
+    # testing action cable
+    post '/cable_testing', to: 'pages#cable_testing'
+  end
 
   mount ActionCable.server, at: '/cable'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

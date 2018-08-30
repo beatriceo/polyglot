@@ -40,9 +40,14 @@ document.onreadystatechange = async () => {
   }
 };
 
+// find chatroom
+const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
 
 const handleJoinSession = async () => {
-  App.session = await App.cable.subscriptions.create("VideoSessionChannel", {
+  App.session = await App.cable.subscriptions.create({
+    channel: "ChatRoomsChannel",
+    room: chatroomId
+  }, {
     connected: () => {
       broadcastData({
         type: JOIN_ROOM,

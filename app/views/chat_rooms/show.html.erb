@@ -1,0 +1,6 @@
+<h1 style="color: white;">This is chatroom #<%= @chat_room.id %></h1>
+<div id="chatroom-hook" data-chatroom-id='<%= @chat_room.id %>'></div>
+
+<button id="test-btn">Test Connection</button>
+
+<%= javascript_pack_tag 'chatrooms' %>

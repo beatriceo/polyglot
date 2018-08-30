@@ -2,8 +2,8 @@
   <div class="contacts-container text-color">
     <div class="contacts half">
       <h2>Contacts</h2>
-      <% 5.times do %>
-        <%= render "pages/contact" %>
+      <% current_user.contacts.each do |contact| %>
+        <%= render "pages/contact", contact: contact %>
       <% end %>
     </div>
     <div class="video-feed half">
@@ -14,6 +14,7 @@
   </div>
 </div>
 
+<div id="my-user-id" data-user-id="<%= current_user.id %>"></div>
+<%= javascript_pack_tag 'notifications' %>
 
-
-
+<button class="btn btn-primary" id="accept-button" style="display: none;">ACCEPT CALL</button>
