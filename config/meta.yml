@@ -1,0 +1,5 @@
+meta_product_name: "Product Name"
+meta_title: "Polyglot - Live translation"
+meta_description: "Translate your call live"
+meta_image: "../assets/images/phone.jpg"                       # should exist in `app/assets/images/`
+twitter_account: "@EthanFraenkel"   # required for Twitter Cards
