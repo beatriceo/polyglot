@@ -16,12 +16,12 @@ let pcPeers = {}; // peer connection
 let localstream;
 
 window.onload = () => {
-  if (document.getElementById("current-user")) {
+  // if (document.getElementById("current-user")) {
     currentUser = document.getElementById("current-user").innerHTML;
     console.log(currentUser)
     localVideo = document.getElementById("local-video");
     remoteVideoContainer = document.getElementById("remote-video-container");
-  }
+  // }
 };
 
 // Ice Credentials
@@ -37,10 +37,10 @@ document.onreadystatechange = async () => {
       })
 
       localstream = stream;
-      if (localVideo) {
+      // if (localVideo) {
         localVideo.srcObject = stream
         localVideo.muted = true
-      }
+      // }
     } catch (e) { console.error(e); }
   }
 };
@@ -72,10 +72,10 @@ document.onreadystatechange = async () => {
 //   });
 // };
 
-if (document.getElementById('chatroom-hook')) {
+// if (document.getElementById('chatroom-hook')) {
   const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
 
-}
+// }
 
 const handleJoinSession = async () => {
   App['chatroom' + chatroomId] = await App.cable.subscriptions.create({
