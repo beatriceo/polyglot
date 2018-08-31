@@ -1,17 +1,29 @@
+<%
+def hello_world
+  puts "Hello World"
+end
+%>
+
 <div class="card">
   <div class="info">
     <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" alt="" class="profile img-circle" width=65>
     <div class="text text-color">
-      <p>FirstName LastName</p>
+      <% if contact.nil? || contact.nil? %> <!-- REPLACE WITH FIRST NAME AND LAST NAME -->
+        <p><%= contact.email %></p>
+      <% else %>
+        <p><%= contact.email %></p>
+        <!-- <p><%#= contact.first_name %> <%#= contact.last_name %></p> -->
+      <% end %>
       <p class="darker">Last call: <%= Time.now %></p>
     </div>
   </div>
-  <div class="call">
-    <%= link_to "#", 'data-toggle':"modal", 'data-target':"#myModal" do  %>
+  <div class="call" data-user-id="<%= contact.id %>">
+    <%= link_to establish_call_path(contact.id), 'data-toggle':"modal", 'data-target':"#myModal" do  %>
       <i class="fas fa-phone"></i>
     <% end %>
   </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -27,7 +39,17 @@
               <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" alt="" class="profile img-circle" width=150>
               <div class="modal-text">
                 <h4 class="modal-title" id="myModalLabel">Calling</h4>
-                <h4><strong>FirstName LastName</strong></h4>
+                <h4>
+                  <strong>
+                    <!-- REPLACE WITH FIRST NAME AND LAST NAME -->
+                    <% if contact.nil? || contact.nil? %>
+                      <p><%= contact.email %></p>
+                    <% else %>
+                      <p><%= contact.email %></p>
+                      <!-- <p><%#= contact.first_name %> <%#= contact.last_name %></p> -->
+                    <% end %>
+                  </strong>
+                </h4>
               </div>
             </div>
           </div>

@@ -17,6 +17,7 @@ let localstream;
 
 window.onload = () => {
   currentUser = document.getElementById("current-user").innerHTML;
+  console.log(currentUser)
   localVideo = document.getElementById("local-video");
   remoteVideoContainer = document.getElementById("remote-video-container");
 };
@@ -40,17 +41,49 @@ document.onreadystatechange = async () => {
   }
 };
 
+// find chatroom
+// const handleJoinSession = async () => {
+//   App.session = await App.cable.subscriptions.create("VideoSessionChannel", {
+//     connected: () => {
+//       broadcastData({
+//         type: JOIN_ROOM,
+//         from: currentUser
+//       });
+//     },
+//     received: data => {
+//       console.log("received", data);
+//       if (data.from === currentUser) return;
+//       switch (data.type) {
+//         case JOIN_ROOM:
+//           return joinRoom(data);
+//         case EXCHANGE:
+//           if (data.to !== currentUser) return;
+//           return exchange(data);
+//         case REMOVE_USER:
+//           return removeUser(data);
+//         default:
+//           return;
+//       }
+//     }
+//   });
+// };
+const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
 
 const handleJoinSession = async () => {
-  App.session = await App.cable.subscriptions.create("VideoSessionChannel", {
+  App['chatroom' + chatroomId] = await App.cable.subscriptions.create({
+    channel: "ChatRoomsChannel",
+    room: chatroomId
+  }, {
     connected: () => {
+      console.log(chatroomId)
       broadcastData({
         type: JOIN_ROOM,
-        from: currentUser
+        from: currentUser,
+        room: chatroomId
       });
     },
     received: data => {
-      console.log("received", data);
+      console.log(data)
       if (data.from === currentUser) return;
       switch (data.type) {
         case JOIN_ROOM:
@@ -88,7 +121,6 @@ const joinRoom = data => {
 };
 
 const removeUser = data => {
-  console.log("removing user", data.from);
   let video = document.getElementById(`remoteVideoContainer+${data.from}`);
   video && video.remove();
   delete pcPeers[data.from];
@@ -96,18 +128,21 @@ const removeUser = data => {
 
 
 const broadcastData = data => {
-  fetch("sessions", {
+  if (data.type === EXCHANGE) {
+    console.log("yayyy")
+  }
+  fetch("chat_room_sessions", {
     method: "POST",
     body: JSON.stringify(data),
-    headers: { "content-type": "application/json" }
+    headers: { "content-type": "application/json", "X-CSRF-Token": document.querySelector('meta[name=csrf-token]').content }
   });
 };
 
 const createPC = (userId, isOffer) => {
   let pc = new RTCPeerConnection(ice);
+  let test = userId
   pcPeers[userId] = pc;
   pc.addStream(localstream);
-
   if (isOffer) {
     pc
       .createOffer()
@@ -117,7 +152,8 @@ const createPC = (userId, isOffer) => {
           type: EXCHANGE,
           from: currentUser,
           to: userId,
-          sdp: JSON.stringify(pc.localDescription)
+          sdp: JSON.stringify(pc.localDescription),
+          room: chatroomId
         });
       })
       .catch(logError);
@@ -129,7 +165,8 @@ const createPC = (userId, isOffer) => {
         type: EXCHANGE,
         from: currentUser,
         to: userId,
-        candidate: JSON.stringify(event.candidate)
+        candidate: JSON.stringify(event.candidate),
+        room: chatroomId
       });
     }
   };
@@ -186,7 +223,8 @@ const exchange = data => {
               type: EXCHANGE,
               from: currentUser,
               to: data.from,
-              sdp: JSON.stringify(pc.localDescription)
+              sdp: JSON.stringify(pc.localDescription),
+              room: chatroomId
             });
           });
         }
