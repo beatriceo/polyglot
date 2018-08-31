@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   end
 
 
+
   private
 
   def find_user

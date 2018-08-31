@@ -1,0 +1,9 @@
+<div class="align-center">
+  <h2>Add a new contact:</h2>
+  <%= form_for User.new, url: connections_path do |f| %>
+    <%= f.label :email, class: "email" %>:
+    <%= f.text_field :email %>
+
+    <%= f.submit %>
+  <% end %>
+</div>

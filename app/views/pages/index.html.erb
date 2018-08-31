@@ -1,10 +1,18 @@
 <div class="container">
   <div class="contacts-container text-color">
     <div class="contacts half">
-      <h2>Contacts</h2>
+      <div class="contacts-header">
+        <h2>Contacts</h2>
+
+        <%= link_to new_connection_path do %>
+          <i class="fas fa-plus-square"></i>
+        <% end %>
+      </div>
+
       <% current_user.contacts.each do |contact| %>
         <%= render "pages/contact", contact: contact %>
       <% end %>
+
     </div>
     <div class="video-feed half">
       <div class="video-content">

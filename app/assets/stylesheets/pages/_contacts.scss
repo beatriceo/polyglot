@@ -2,6 +2,14 @@ a:hover {
   text-decoration: none;
 }
 
+.contacts-header {
+  display: flex;
+  justify-content: space-between;
+  a {
+    align-self: flex-end;
+  }
+}
+
 .card {
   display: flex;
   justify-content: space-between;

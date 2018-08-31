@@ -6,10 +6,14 @@ class PagesController < ApplicationController
   end
 
   def index
+    @contact = Connection.new
   end
 
   def home
   end
+
+
+
 
   def cable_testing
     chatroom = 'chat_room_' + params[:chat_room_id]
