@@ -36,7 +36,6 @@ class PagesController < ApplicationController
         chat_room_id: chat_room.id
       }
     })
-
   end
 
   def accept_call
