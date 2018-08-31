@@ -1,7 +1,5 @@
 // Broadcast Types
 
-class Signaling {}
-
 const JOIN_ROOM = "JOIN_ROOM";
 const EXCHANGE = "EXCHANGE";
 const REMOVE_USER = "REMOVE_USER";
@@ -16,12 +14,9 @@ let pcPeers = {}; // peer connection
 let localstream;
 
 window.onload = () => {
-  // if (document.getElementById("current-user")) {
-    currentUser = document.getElementById("current-user").innerHTML;
-    console.log(currentUser)
-    localVideo = document.getElementById("local-video");
-    remoteVideoContainer = document.getElementById("remote-video-container");
-  // }
+  currentUser = document.getElementById("current-user").innerHTML;
+  localVideo = document.getElementById("local-video");
+  remoteVideoContainer = document.getElementById("remote-video-container");
 };
 
 // Ice Credentials
@@ -37,45 +32,14 @@ document.onreadystatechange = async () => {
       })
 
       localstream = stream;
-      // if (localVideo) {
-        localVideo.srcObject = stream
-        localVideo.muted = true
-      // }
+      localVideo.srcObject = stream
+      localVideo.muted = true
     } catch (e) { console.error(e); }
   }
 };
 
-// find chatroom
-// const handleJoinSession = async () => {
-//   App.session = await App.cable.subscriptions.create("VideoSessionChannel", {
-//     connected: () => {
-//       broadcastData({
-//         type: JOIN_ROOM,
-//         from: currentUser
-//       });
-//     },
-//     received: data => {
-//       console.log("received", data);
-//       if (data.from === currentUser) return;
-//       switch (data.type) {
-//         case JOIN_ROOM:
-//           return joinRoom(data);
-//         case EXCHANGE:
-//           if (data.to !== currentUser) return;
-//           return exchange(data);
-//         case REMOVE_USER:
-//           return removeUser(data);
-//         default:
-//           return;
-//       }
-//     }
-//   });
-// };
 
-// if (document.getElementById('chatroom-hook')) {
-  const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
-
-// }
+const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
 
 const handleJoinSession = async () => {
   App['chatroom' + chatroomId] = await App.cable.subscriptions.create({
@@ -83,7 +47,6 @@ const handleJoinSession = async () => {
     room: chatroomId
   }, {
     connected: () => {
-      console.log(chatroomId)
       broadcastData({
         type: JOIN_ROOM,
         from: currentUser,
@@ -91,7 +54,6 @@ const handleJoinSession = async () => {
       });
     },
     received: data => {
-      console.log(data)
       if (data.from === currentUser) return;
       switch (data.type) {
         case JOIN_ROOM:
@@ -136,9 +98,6 @@ const removeUser = data => {
 
 
 const broadcastData = data => {
-  if (data.type === EXCHANGE) {
-    console.log("yayyy")
-  }
   fetch("chat_room_sessions", {
     method: "POST",
     body: JSON.stringify(data),
@@ -220,7 +179,7 @@ const exchange = data => {
   }
 
   if (data.sdp) {
-    sdp = JSON.parse(data.sdp);
+    const sdp = JSON.parse(data.sdp);
     pc
       .setRemoteDescription(new RTCSessionDescription(sdp))
       .then(() => {
@@ -242,3 +201,15 @@ const exchange = data => {
 };
 
 const logError = error => console.warn("Whoops! Error:", error);
+
+
+const joinButton = document.getElementById("join-btn")
+joinButton.addEventListener('click', event => {
+  handleJoinSession()
+})
+
+// WARNING: COMPLETELY HACKISH SOLUTION --> MUST INTRODUCE SOME SORT OF DELAY!
+setTimeout(function() {
+  joinButton.click()
+}, 5000);
+
