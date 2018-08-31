@@ -6,7 +6,11 @@ end
 
 <div class="card">
   <div class="info">
-    <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" alt="" class="profile img-circle" width=65>
+    <% if contact.photo.url.nil? %>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar profile dropdown-toggle img-circle" width=65>
+    <% else %>
+      <%= cl_image_tag contact.photo, class: "profile avatar dropdown-toggle img-circle", width:65%>
+    <% end %>
     <div class="text text-color">
       <% if contact.nil? || contact.nil? %> <!-- REPLACE WITH FIRST NAME AND LAST NAME -->
         <p><%= contact.email %></p>
