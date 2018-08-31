@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   patch '/accept_call/:request_id', to: 'requests#update', as: 'update_request'
 
   get '/contacts', to: 'pages#index'
+  get '/setting', to: 'users#setting'
   post '/sessions', to: 'video_sessions#create'
 
   post '/chat_rooms/chat_room_sessions', to: 'chat_rooms#create'

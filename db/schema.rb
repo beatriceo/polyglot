@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_123204) do
+ActiveRecord::Schema.define(version: 2018_08_30_100110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,10 @@ ActiveRecord::Schema.define(version: 2018_08_29_123204) do
     t.string "first_name"
     t.string "last_name"
     t.string "photo"
+    t.string "language"
+    t.string "caption_font"
+    t.integer "caption_font_size"
+    t.boolean "enable_transcript"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
