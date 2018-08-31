@@ -12,7 +12,6 @@ import ActionCable from 'actioncable'
 const userId = parseInt(document.getElementById("my-user-id").dataset["userId"])
 let chatRoomId = null
 
-
 App.cable.subscriptions.create({
   channel: 'NotificationsChannel'
 }, {
