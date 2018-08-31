@@ -1,7 +1,7 @@
 <div class="container">
   <div class="contacts-container text-color">
     <div class="contacts half">
-      <h2>Contacts</h2>
+    <h2 class="contact">Contacts</h2>
       <% current_user.contacts.each do |contact| %>
         <%= render "pages/contact", contact: contact %>
       <% end %>
