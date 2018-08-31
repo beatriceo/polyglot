@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/call', to: 'pages#call'
 
   get '/contacts', to: 'pages#index'
+  get '/setting', to: 'users#setting'
   post '/sessions', to: 'video_sessions#create'
 
   mount ActionCable.server, at: '/cable'

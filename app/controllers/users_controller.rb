@@ -26,6 +26,11 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def setting
+    @user = current_user
+  end
+
+
   private
 
   def find_user
@@ -33,7 +38,8 @@ class UsersController < ApplicationController
     #authorize @user
   end
 
+
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :description, :photo)
+    params.require(:user).permit(:email, :first_name, :last_name, :description, :photo, :language, :caption_font, :caption_font_size, :enable_transcript)
   end
 end
