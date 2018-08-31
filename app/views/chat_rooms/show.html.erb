@@ -1,9 +1,8 @@
-<button onclick="handleJoinSession()" data-room="<%= @chat_room.id %>">Join Room</button>
-<!-- <div id="join-session" data-room="<%= @chat_room.id %>"> -->
-<!-- <h1 style="color: white;">This is chatroom #<%= @chat_room.id %></h1> -->
+<button id="join-btn" data-room="<%= @chat_room.id %>">Join Room</button>
+<!-- <div id="join-session" onclick="handleJoinSession()" data-room="<%= @chat_room.id %>"> -->
+
 <div id="chatroom-hook" data-chatroom-id='<%= @chat_room.id %>'></div>
 
-<!-- <button id="test-btn">Test Connection</button> -->
 <div class="call-container">
   <div id="remote-video-container">
     <div id="video_overlays">
@@ -16,12 +15,12 @@
   <span id="current-user" class="text-color" style="display:none"><%= current_user.id %></span>
 </div>
 
-<!-- <script>
-  const joinSession = document.getElementById("join-session")
-  joinSession.addEventListener('load', event => {
-    handleJoinSession()
-  })
-</script> -->
-
-
 <%= javascript_pack_tag 'chatrooms' %>
+<%= javascript_pack_tag 'webrtc' %>
+
+<script>
+
+</script>
+
+
+
