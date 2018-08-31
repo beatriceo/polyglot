@@ -41,7 +41,11 @@ end
           <% end %>
           <div class="container">
             <div class="modal-container">
-              <img src="https://kitt.lewagon.com/placeholder/users/ssaunier" alt="" class="profile img-circle" width=150>
+              <% if contact.photo.url.nil? %>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar profile dropdown-toggle img-circle" width=150>
+              <% else %>
+                <%= cl_image_tag contact.photo, class: "profile avatar dropdown-toggle img-circle", width:150%>
+              <% end %>
               <div class="modal-text">
                 <h4 class="modal-title" id="myModalLabel">Calling</h4>
                 <h4>
