@@ -8,7 +8,6 @@
           <i class="fas fa-plus-square"></i>
         <% end %>
       </div>
-
       <% current_user.contacts.each do |contact| %>
         <%= render "pages/contact", contact: contact %>
       <% end %>

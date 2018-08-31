@@ -1,0 +1,10 @@
+<%= simple_form_for(@page) do |p| %>
+
+  <%= p.input :first_name, as: :text, input_html: { autocomplete: "off" } %>
+  <%= p.input :last_name, as: :text, input_html: { autocomplete: "off" } %>
+  <%= p.input :email, as: :text, input_html: { autocomplete: "off" } %>
+  <%= p.input :photo %>
+  <%= p.input :photo_cache, as: :hidden %>
+
+  <%= p.button :submit, class: "btn btn-primary" %>
+<% end %>
