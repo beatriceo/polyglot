@@ -207,3 +207,9 @@ const joinButton = document.getElementById("join-btn")
 joinButton.addEventListener('click', event => {
   handleJoinSession()
 })
+
+// WARNING: COMPLETELY HACKISH SOLUTION --> MUST INTRODUCE SOME SORT OF DELAY!
+setTimeout(function() {
+  joinButton.click()
+}, 5000);
+
