@@ -1,6 +1,5 @@
 class ConnectionsController < ApplicationController
   def new
-
   end
 
   def create
@@ -10,9 +9,17 @@ class ConnectionsController < ApplicationController
     @connection.contact = contact_user
 
     if @connection.save
-        redirect_to contacts_path
+      contact_message = nil
+      if contact_user.first_name.nil? || contact_user.last_name.nil?
+        contact_message = "#{contact_user.email}"
+      else
+        contact_message = "#{contact_user.first_name} #{contact_user.last_name}"
+      end
+      flash[:notice] = "Added #{contact_message} to contacts"
+      redirect_to contacts_path
     else
-
+      flash[:alert] = "Invalid email address!"
+      render 'new'
     end
   end
 end

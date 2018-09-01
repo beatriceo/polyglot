@@ -91,3 +91,22 @@ input:checked + .slider:before {
 .padding-right {
   padding-right: 10px;
 }
+
+.margin-right {
+  margin-right: 10px;
+}
+
+.flex-inline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 80vh;
+}
