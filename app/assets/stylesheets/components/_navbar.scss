@@ -36,10 +36,16 @@
           margin-right: 2.5em;
         }
 
-        &.active, &:hover {
+        &.active {
           border-bottom: 5px solid $primary;
           color: white;
+        }
 
+        &:hover {
+          color: white;
+        }
+
+        &.active, &:hover {
           a {
             color: white;
           }
