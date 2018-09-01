@@ -12,6 +12,9 @@
 
     font-size: 2em;
     font-weight: bold;
+    a:hover {
+      color: $primary;
+    }
   }
 
   .right-align {
@@ -52,7 +55,7 @@
         }
 
         a {
-          color: #C4C4C4;
+          color: $text-inactive;
           text-decoration: none;
         }
       }
@@ -76,11 +79,11 @@
 
     li {
       a {
-        color: $icon;
+        color: $text-inactive;
 
         &:hover {
-          color: $primary;
-          background-color: $navbar-background;
+          color: white;
+          background-color: $background;
         }
       }
     }

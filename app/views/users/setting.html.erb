@@ -57,19 +57,19 @@
         <%= simple_form_for(@user) do |t| %>
           <div>
             <div class="card card-form card-form-no-hover">
-              <%= t.label :language %>
+              <%= t.label :language, class:'no-padding no-margin' %>
               <%= t.input_field :language, collection: languages.sort, class:'input-field-text-black input-dropdown' %>
             </div>
             <div class="card card-form card-form-no-hover">
-              <%= t.label :caption_font %>
+              <%= t.label :caption_font, class:'no-padding no-margin' %>
               <%= t.input_field :caption_font, collection: fonts.sort, class:'input-field-text-black input-dropdown' %>
             </div>
             <div class="card card-form card-form-no-hover">
-              <%= t.label :caption_font_size %>
+              <%= t.label :caption_font_size, class:'no-padding no-margin' %>
               <%= t.input_field :caption_font_size, class:'input-field-text-black' %>
             </div>
             <div class="card card-form card-form-no-hover">
-              <%= t.label :enable_transcript %>
+              <%= t.label :enable_transcript, class:'no-padding no-margin' %>
               <label class="switch">
                 <%= t.input_field :enable_transcript, class:'input-field-text-black' %>
                 <span class="slider round"></span>
