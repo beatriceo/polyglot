@@ -1,32 +1,45 @@
 <div class="polyglot-navbar">
-  <div class="logo">
-      Polyglot
-  </div>
+  <div class="logo">Polyglot</div>
 
-  <div class="right-align">
+  <div class="right-align hidden-xs hidden-sm">
     <div class="links">
-      <div class="active"><%= link_to "Dashboard", contacts_path %></div>
-      <div><%= link_to "Settings", setting_path %></div>
+      <div id="contacts"><%= link_to "Contacts", contacts_path %></div>
+      <div id="settings"><%= link_to "Settings", setting_path %></div>
     </div>
     <div class="profile">
-    <% if current_user.nil? %>
-      <%= link_to "Login", new_user_session_path  %>
-    <% else %>
-      <div class="dropdown">
-        <div data-toggle="dropdown">
-          <% if current_user.photo.url.nil? %>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar dropdown-toggle img-circle">
-          <% else %>
-            <%= cl_image_tag current_user.photo, class: "avatar dropdown-toggle img-circle"%>
-          <% end %>
+      <% if current_user.nil? %>
+        <%= link_to "Login", new_user_session_path  %>
+      <% else %>
+        <div class="dropdown">
+          <div data-toggle="dropdown">
+            <% if current_user.photo.url.nil? %>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar dropdown-toggle img-circle">
+            <% else %>
+              <%= cl_image_tag current_user.photo, class: "avatar dropdown-toggle img-circle"%>
+            <% end %>
+          </div>
+          <ul class="dropdown-menu dropdown-menu-right polyglot-dropdown">
+            <li><%= link_to "Profile", user_path(current_user) %></li>
+            <li><%= link_to "Logout", destroy_user_session_path %></li>
+          </ul>
         </div>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <!-- <li><a href="#">Profile</a></li> -->
-          <li><%= link_to "Profile", user_path(current_user) %></li>
-          <li><%= link_to "Logout", destroy_user_session_path %></li>
-        </ul>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="burger-menu hidden-md hidden-lg">
+    <div class="dropdown">
+      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+      <ul class="dropdown-menu dropdown-menu-right polyglot-dropdown">
+        <li><%= link_to "Contacts", contacts_path %></li>
+        <li><%= link_to "Settings", setting_path %></li>
+          <% if current_user.nil? %>
+            <li><%= link_to "Login", new_user_session_path  %></li>
+          <% else %>
+            <li><%= link_to "Profile", user_path(current_user) %></li>
+            <li><%= link_to "Logout", destroy_user_session_path %></li>
+          <% end %>
+      </ul>
     </div>
   </div>
 </div>

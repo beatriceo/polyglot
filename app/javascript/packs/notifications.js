@@ -1,6 +1,6 @@
 import ActionCable from 'actioncable'
 
-// create App object with key cable == new cosumer
+// create App object with key cable == new consumer
 (function() {
   window.App || (window.App = {});
 
@@ -40,10 +40,9 @@ App.cable.subscriptions.create({
   }
 })
 
-
+// Receive information from index.html.erb
 const acceptButton = document.getElementById('accept-button')
 
 acceptButton.addEventListener('click', event => {
-  // event.preventDefault()
   document.getElementById('chat-room-id').value = chatRoomId
 })

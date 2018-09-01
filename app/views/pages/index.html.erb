@@ -1,32 +1,36 @@
+<!-- CONTACTS PAGE -->
 <div class="container">
   <div class="contacts-container text-color">
     <div class="contacts half">
       <div class="contacts-header">
         <h2>Contacts</h2>
-
         <%= link_to new_connection_path do %>
           <i class="fas fa-plus-square"></i>
         <% end %>
       </div>
-      <% current_user.contacts.each do |contact| %>
-        <%= render "pages/contact", contact: contact %>
-      <% end %>
-
+      <div class="contacts-list">
+        <% current_user.contacts.each do |contact| %>
+          <%= render "pages/contact", contact: contact %>
+        <% end %>
+      </div>
     </div>
-    <div class="video-feed half">
+    <div class="video-feed half hidden-xs hidden-sm">
       <div class="video-content">
-        <video id="contacts-video" autoplay=""></video>
+        <video id="contacts-video" class="flex-video" autoplay=""></video>
       </div>
     </div>
   </div>
 </div>
 
+<!-- INFORMATION TO BE PASSED TO NOTIFICATIONS.JS -->
 <div id="my-user-id" data-user-id="<%= current_user.id %>"></div>
 
 <form action="/accept_call" method="post">
   <input type="hidden" id="chat-room-id" name="chat_room_id" value=""/>
   <input type="submit" id="accept-button" class="btn btn-primary" id="accept-button" style="display: none;" value="ACCEPT CALL"/>
 </form>
+
+<div id="contacts-page"></div>
 
 <%= javascript_pack_tag 'notifications' %>
 <%= javascript_pack_tag 'local_video' %>
