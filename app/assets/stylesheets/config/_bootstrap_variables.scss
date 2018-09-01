@@ -14,7 +14,7 @@ $gray-base:       $gray;
 $brand-primary:   $primary;
 $brand-success:   $green;
 $brand-info:      $yellow;
-$brand-danger:    $red;
+$brand-danger:    $warn;
 $brand-warning:   $orange;
 $brand-secondary: $secondary;
 
@@ -52,3 +52,4 @@ $border-radius-small: 2px;
 }
 
 // Override other variables below!
+$input-border-focus: $primary;
