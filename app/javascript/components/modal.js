@@ -1,12 +1,15 @@
 const triggerModalEvent = () => {
-  const btn = document.getElementById("modalTrigger");
-  const modal = document.getElementById("myModal");
 
-  if (btn) {
-    btn.addEventListener('click', function(event) {
-      $('#myModal').modal('show');
-    });
-  }
+  const buttons = document.querySelectorAll(".modalTrigger");
+
+  buttons.forEach(btn => {
+    if (btn) {
+      btn.addEventListener('click', function(event) {
+        const btnId = btn.getAttribute('data-user-id')
+        $("#myModal"+`${btnId}`).modal('show');
+      });
+    }
+  })
 }
 
 export { triggerModalEvent }

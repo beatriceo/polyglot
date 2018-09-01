@@ -11,6 +11,7 @@ a:hover {
 }
 
 .card {
+  min-width: 360px;
   display: flex;
   justify-content: space-between;
   background: $card-background;
@@ -72,7 +73,16 @@ a:hover {
 }
 
 .video-content {
-  height: 485px;
+  // height: 485px;
+
+  padding-left: 0.2vw;
+  display: flex;
+  justify-content: center;
+  .flex-video {
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+  }
   // background-color: black;
 }
 
@@ -132,25 +142,21 @@ a:hover {
   align-items: center;
 }
 
-
-
-
-
 .contact {
   color: white;
 }
 
 .contacts {
-  height: 570px;
-  overflow: scroll;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-
-
-
-
-
-
+.contacts-list{
+  height: 90vh;
+  overflow: scroll;
+}
 
 
 

@@ -1,26 +1,36 @@
+<div id="contacts-page"></div>
+
+<!-- CONTACTS PAGE -->
 <div class="container">
   <div class="contacts-container text-color">
-    <div class="contacts half">
-      <div class="contacts-header">
-        <h2>Contacts</h2>
-
-        <%= link_to new_connection_path do %>
-          <i class="fas fa-plus-square"></i>
-        <% end %>
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="contacts">
+          <div class="contacts-header">
+            <h2>Contacts</h2>
+            <%= link_to new_connection_path do %>
+              <i class="fas fa-plus-square"></i>
+            <% end %>
+          </div>
+          <div class="contacts-list">
+            <% current_user.contacts.each do |contact| %>
+              <%= render "pages/contact", contact: contact %>
+            <% end %>
+          </div>
+        </div>
       </div>
-      <% current_user.contacts.each do |contact| %>
-        <%= render "pages/contact", contact: contact %>
-      <% end %>
-
-    </div>
-    <div class="video-feed half">
-      <div class="video-content">
-        <video id="contacts-video" autoplay=""></video>
+      <div class="col-xs-12 col-md-6 hidden-xs hidden-sm">
+        <div class="video-feed">
+          <div class="video-content">
+            <video id="contacts-video" class="flex-video" autoplay=""></video>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- INFORMATION TO BE PASSED TO NOTIFICATIONS.JS -->
 <div id="my-user-id" data-user-id="<%= current_user.id %>"></div>
 
 <form action="/accept_call" method="post">
