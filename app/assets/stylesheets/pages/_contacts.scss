@@ -11,6 +11,7 @@ a:hover {
 }
 
 .card {
+  min-width: 360px;
   display: flex;
   justify-content: space-between;
   background: $card-background;
@@ -146,10 +147,14 @@ a:hover {
 }
 
 .contacts {
-  height: 570px;
+  // height: 570px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contacts-list{
+  height: 80vh;
   overflow: scroll;
 }
 
