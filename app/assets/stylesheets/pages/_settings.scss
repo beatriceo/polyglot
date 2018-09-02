@@ -72,6 +72,15 @@ input:checked + .slider:before {
   color: black;
 }
 
+.slider.rounded {
+  border-radius: 3px;
+}
+
+.slider.rounded:before {
+  border-radius: 3px;
+}
+
+
 .settings {
   color: white;
 }
@@ -100,6 +109,10 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 .center-screen {
