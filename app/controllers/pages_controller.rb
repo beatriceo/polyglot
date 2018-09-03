@@ -13,8 +13,6 @@ class PagesController < ApplicationController
   end
 
 
-
-
   def cable_testing
     chatroom = 'chat_room_' + params[:chat_room_id]
     puts params

@@ -12,6 +12,7 @@ a:hover {
 }
 
 .card {
+  min-width: 360px;
   display: flex;
   justify-content: space-between;
   background: $card-background;
@@ -73,8 +74,17 @@ a:hover {
 }
 
 .video-content {
-  height: 485px;
-  background-color: black;
+  // height: 485px;
+
+  padding-left: 0.2vw;
+  display: flex;
+  justify-content: center;
+  .flex-video {
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+  }
+  // background-color: black;
 }
 
 .half {
@@ -91,6 +101,8 @@ a:hover {
   align-items: center;
 }
 
+// Modal
+
 .modal-header {
   border-bottom: 0px;
   i {
@@ -100,6 +112,7 @@ a:hover {
 
 .modal-color {
   background-color: $card-background;
+  min-width: 296px;
 }
 
 .vertical-alignment-helper {
@@ -133,17 +146,28 @@ a:hover {
   align-items: center;
 }
 
+.modal-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1100px) {
+    .modal-picture {
+      width: 50px;
+    }
+}
 
 
-
+// Contact
 
 .contact {
   color: white;
 }
 
 .contacts {
-  height: 570px;
-  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .close {
@@ -159,12 +183,10 @@ a:hover {
   filter: alpha(opacity=20);
 }
 
-
-
-
-
-
-
+.contacts-list{
+  height: 90vh;
+  overflow: scroll;
+}
 
 
 

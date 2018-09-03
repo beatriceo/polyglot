@@ -12,19 +12,23 @@
 
     font-size: 2em;
     font-weight: bold;
+    a:hover {
+      color: $primary;
+    }
   }
-
 
   .right-align {
     height: 100%;
     width: 16em;
-    margin-right: 5em;
+    margin-right: 4em;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .links {
       display: flex;
       height: inherit;
+
       div {
         height: inherit;
         display: flex;
@@ -32,19 +36,26 @@
         border-bottom: 5px solid transparent;
 
         &:first-child {
-          margin-right: 1em;
+          margin-right: 2.5em;
         }
 
         &.active {
           border-bottom: 5px solid $primary;
           color: white;
-
-           a {
-            color: white;
-           }
         }
+
+        &:hover {
+          color: white;
+        }
+
+        &.active, &:hover {
+          a {
+            color: white;
+          }
+        }
+
         a {
-          color: #C4C4C4;
+          color: $text-inactive;
           text-decoration: none;
         }
       }
@@ -53,7 +64,28 @@
 
   .profile {
     img {
-      width: 3.25em;
+      width: 3em;
+      padding: 0.2em;
+    }
+  }
+
+  .burger-menu {
+    margin-right: 20px;
+    color: $primary;
+  }
+
+  .polyglot-dropdown {
+    background-color: $navbar-background;
+
+    li {
+      a {
+        color: $text-inactive;
+
+        &:hover {
+          color: white;
+          background-color: $background;
+        }
+      }
     }
   }
 }

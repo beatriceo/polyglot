@@ -1,8 +1,23 @@
-<div class="align-center">
-  <h2>Add a new contact:</h2>
-  <%= form_for User.new, url: connections_path do |f| %>
-    <%= f.label :email, class: "email_label_color" %>:
-    <%= f.text_field :email %>
+<% params["action"] = "Add contact" %>
 
-    <%= f.submit %>
-  <% end %>
+<div class="center-screen">
+  <div class="align-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-offset-2 col-xs-8 col-xs-offset-2">
+          <h2>Enter an email address:</h2>
+        </div>
+        <%= simple_form_for User.new, url: connections_path, class: "input-group" do |f| %>
+          <div class="col-xs-offset-2 col-xs-8 col-xs-offset-2 ">
+            <div class="flex-inline">
+              <%= f.input_field :email, class: "form-control margin-right" %>
+              <div class="input-group-append">
+              <%= f.button :submit, value: "Add Contact" , class: "btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

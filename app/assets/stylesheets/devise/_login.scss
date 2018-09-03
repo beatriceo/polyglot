@@ -18,13 +18,13 @@
     url('https://unsplash.com/photos/jay5BqVyf5A');
 
 
-
   .login-content {
     position: relative;
-    top: -10vh;
+    // top: -10vh;
     padding: 50px;
     background-color: white;
     width: 25vw;
+    min-width: 300px;
     border-radius: 3px;
     box-shadow: 1px 1px 10px rgba(0,0,0, 0.21);
 

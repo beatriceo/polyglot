@@ -11,11 +11,19 @@
         <%= f.input :password,
                     required: false,
                     input_html: { autocomplete: "current-password" } %>
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+        <div class="flex-inline space-between">
+          <%= f.label :remember_me %>
+          <label class="switch">
+            <%= f.input_field :enable_transcript, as: :boolean if devise_mapping.rememberable? %>
+            <span class="slider rounded"></span>
+          </label>
+        </div>
+
+        <%#= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
       </div>
 
       <div class="form-actions">
-        <%= f.button :submit, "Log in", class: "login btn btn-primary" %>
+        <%= f.button :submit, "Log in", class: "login btn btn-primary vertical-margin" %>
       </div>
     <% end %>
 

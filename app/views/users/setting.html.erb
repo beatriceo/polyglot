@@ -1,158 +1,101 @@
-<div class="profile-container">
-  <%= simple_form_for(@user) do |t| %>
-    <div class="profile-form">
-      <div>
-        <div class="lign">
+<div id="settings-page"></div>
 
-       <div class="card"><%= t.input :language, collection:
-[
-"Afrikaans (South Africa)",
-"Amharic (Ethiopia)",
-"Armenian (Armenia)",
-"Azerbaijani (Azerbaijan)",
-"Indonesian (Indonesia)",
-"Malay (Malaysia)",
-"Bengali (Bangladesh)",
-"Bengali (India)",
-"Catalan (Spain)",
-"Czech (Czech Republic)",
-"Danish (Denmark)",
-"German (Germany)",
-"English (Australia)",
-"English (Canada)",
-"English (Ghana)",
-"English (United Kingdom)",
-"English (India)",
-"English (Ireland)",
-"English (Kenya)",
-"English (New Zealand)",
-"English (Nigeria)",
-"English (Philippines)",
-"English (South Africa)",
-"English (Tanzania)",
-"English (United States)",
-"Spanish (Argentina)",
-"Spanish (Bolivia)",
-"Spanish (Chile)",
-"Spanish (Colombia)",
-"Spanish (Costa Rica)",
-"Spanish (Ecuador)",
-"Spanish (El Salvador)",
-"Spanish (Spain)",
-"Spanish (United States)",
-"Spanish (Guatemala)",
-"Spanish (Honduras)",
-"Spanish (Mexico)",
-"Spanish (Nicaragua)",
-"Spanish (Panama)",
-"Spanish (Paraguay)",
-"Spanish (Peru)",
-"Spanish (Puerto Rico)",
-"Spanish (Dominican Republic)",
-"Spanish (Uruguay)",
-"Spanish (Venezuela)",
-"Basque (Spain)",
-"Filipino (Philippines)",
-"French (Canada)",
-"French (France)",
-"Galician (Spain)",
-"Georgian (Georgia)",
-"Gujarati (India)",
-"Croatian (Croatia)",
-"Zulu (South Africa)",
-"Icelandic (Iceland)",
-"Italian (Italy)",
-"Javanese (Indonesia)",
-"Kannada (India)",
-"Khmer (Cambodia)",
-"Lao (Laos)",
-"Latvian (Latvia)",
-"Lithuanian (Lithuania)",
-"Hungarian (Hungary)",
-"Malayalam (India)",
-"Marathi (India)",
-"Dutch (Netherlands)",
-"Nepali (Nepal)",
-"Norwegian Bokmål (Norway)",
-"Polish (Poland)",
-"Portuguese (Brazil)",
-"Portuguese (Portugal)",
-"Romanian (Romania)",
-"Sinhala (Sri Lanka)",
-"Slovak (Slovakia)",
-"Slovenian (Slovenia)",
-"Sundanese (Indonesia)",
-"Swahili (Tanzania)",
-"Swahili (Kenya)",
-"Finnish (Finland)",
-"Swedish (Sweden)",
-"Tamil (India)",
-"Tamil (Singapore)",
-"Tamil (Sri Lanka)",
-"Tamil (Malaysia)",
-"Telugu (India)",
-"Vietnamese (Vietnam)",
-"Turkish (Turkey)",
-"Urdu (Pakistan)",
-"Urdu (India)",
-"Greek (Greece)",
-"Bulgarian (Bulgaria)",
-"Russian (Russia)",
-"Serbian (Serbia)",
-"Ukrainian (Ukraine)",
-"Hebrew (Israel)",
-"Arabic (Israel)",
-"Arabic (Jordan)",
-"Arabic (United Arab Emirates)",
-"Arabic (Bahrain)",
-"Arabic (Algeria)",
-"Arabic (Saudi Arabia)",
-"Arabic (Iraq)",
-"Arabic (Kuwait)",
-"Arabic (Morocco)",
-"Arabic (Tunisia)",
-"Arabic (Oman)",
-"Arabic (Qatar)",
-"Arabic (Lebanon)",
-"Arabic (Egypt)",
-"Persian (Iran)",
-"Hindi (India)",
-"Thai (Thailand)",
-"Korean (South Korea)",
-"Chinese, Mandarin (Traditional, Taiwan)",
-"Chinese, Cantonese (Traditional, Hong Kong)",
-"Japanese (Japan)",
-"Chinese, Mandarin (Simplified, Hong Kong)",
-"Chinese, Mandarin (Simplified, China)"] %>
+<% languages = [
+  "Afrikaans (South Africa)", "Amharic (Ethiopia)", "Armenian (Armenia)",
+  "Azerbaijani (Azerbaijan)", "Indonesian (Indonesia)", "Malay (Malaysia)",
+  "Bengali (Bangladesh)", "Bengali (India)", "Catalan (Spain)",
+  "Czech (Czech Republic)", "Danish (Denmark)", "German (Germany)",
+  "English (Australia)", "English (Canada)", "English (Ghana)",
+  "English (United Kingdom)", "English (India)", "English (Ireland)",
+  "English (Kenya)", "English (New Zealand)", "English (Nigeria)",
+  "English (Philippines)", "English (South Africa)", "English (Tanzania)",
+  "English (United States)", "Spanish (Argentina)", "Spanish (Bolivia)",
+  "Spanish (Chile)", "Spanish (Colombia)", "Spanish (Costa Rica)",
+  "Spanish (Ecuador)", "Spanish (El Salvador)", "Spanish (Spain)",
+  "Spanish (United States)", "Spanish (Guatemala)", "Spanish (Honduras)",
+  "Spanish (Mexico)", "Spanish (Nicaragua)", "Spanish (Panama)",
+  "Spanish (Paraguay)", "Spanish (Peru)", "Spanish (Puerto Rico)",
+  "Spanish (Dominican Republic)", "Spanish (Uruguay)", "Spanish (Venezuela)",
+  "Basque (Spain)", "Filipino (Philippines)", "French (Canada)",
+  "French (France)", "Galician (Spain)", "Georgian (Georgia)",
+  "Gujarati (India)", "Croatian (Croatia)", "Zulu (South Africa)",
+  "Icelandic (Iceland)", "Italian (Italy)", "Javanese (Indonesia)",
+  "Kannada (India)", "Khmer (Cambodia)", "Lao (Laos)",
+  "Latvian (Latvia)", "Lithuanian (Lithuania)", "Hungarian (Hungary)",
+  "Malayalam (India)", "Marathi (India)", "Dutch (Netherlands)",
+  "Nepali (Nepal)", "Norwegian Bokmål (Norway)", "Polish (Poland)",
+  "Portuguese (Brazil)", "Portuguese (Portugal)", "Romanian (Romania)",
+  "Sinhala (Sri Lanka)", "Slovak (Slovakia)", "Slovenian (Slovenia)",
+  "Sundanese (Indonesia)", "Swahili (Tanzania)", "Swahili (Kenya)",
+  "Finnish (Finland)", "Swedish (Sweden)", "Tamil (India)",
+  "Tamil (Singapore)", "Tamil (Sri Lanka)", "Tamil (Malaysia)",
+  "Telugu (India)", "Vietnamese (Vietnam)", "Turkish (Turkey)",
+  "Urdu (Pakistan)", "Urdu (India)", "Greek (Greece)",
+  "Bulgarian (Bulgaria)", "Russian (Russia)", "Serbian (Serbia)",
+  "Ukrainian (Ukraine)", "Hebrew (Israel)", "Arabic (Israel)",
+  "Arabic (Jordan)", "Arabic (United Arab Emirates)", "Arabic (Bahrain)",
+  "Arabic (Algeria)", "Arabic (Saudi Arabia)", "Arabic (Iraq)",
+  "Arabic (Kuwait)", "Arabic (Morocco)", "Arabic (Tunisia)",
+  "Arabic (Oman)", "Arabic (Qatar)", "Arabic (Lebanon)",
+  "Arabic (Egypt)", "Persian (Iran)", "Hindi (India)",
+  "Thai (Thailand)", "Korean (South Korea)", "Chinese, Mandarin (Traditional, Taiwan)",
+  "Chinese, Cantonese (Traditional, Hong Kong)", "Japanese (Japan)",
+  "Chinese, Mandarin (Simplified, Hong Kong)",
+  "Chinese, Mandarin (Simplified, China)" ]%>
 
+<% fonts = [
+    "Arial",
+    "Times New Roman",
+    "Calibri"
+  ] %>
+
+<div class="container">
+  <div class="contacts-container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <div class="settings">
+          <h2>Settings</h2>
+          <div>
+            <%= simple_form_for(@user) do |t| %>
+              <div>
+                <div class="card card-form card-form-no-hover">
+                  <%= t.label :language, class:'padding-right no-margin font-weight-normal' %>
+                  <%= t.input_field :language, collection: languages.sort, class:'input-field-text-black input-dropdown form-control' %>
+                </div>
+                <div class="card card-form card-form-no-hover">
+                  <%= t.label :caption_font, class:'padding-right no-margin font-weight-normal' %>
+                  <%= t.input_field :caption_font, collection: fonts.sort, class:'input-field-text-black input-dropdown form-control' %>
+                </div>
+                <div class="card card-form card-form-no-hover">
+                  <%= t.label :caption_font_size, class:'padding-right no-margin font-weight-normal' %>
+                  <%= t.input_field :caption_font_size, class:'input-field-text-black input-dropdown form-control' %>
+                </div>
+                <div class="card card-form card-form-no-hover">
+                  <%= t.label :enable_transcript, class:'padding-right no-margin font-weight-normal' %>
+                  <label class="switch">
+                    <%= t.input_field :enable_transcript, class:'input-field-text-black' %>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <%= link_to "Save", contacts_path, class: "btn btn-primary save-btn form-control" %>
+                <p></p>
+              </div>
+            <% end %>
+          </div>
         </div>
+      </div>
+      <div class="col-xs-12 col-md-6 hidden-xs hidden-sm">
+        <div class="video-feed">
+          <div class="video-content">
+            <video id="settings-video" class="flex-video" autoplay=""></video>
+          </div>
         </div>
-       <div class="card"><%= t.input :caption_font %></div>
-       <div class="card"><%= t.input :caption_font_size %></div>
-       <div class="card"><%= t.input :enable_transcript %></div>
-
-        <%= link_to "Save", contacts_path, class: "btn btn-primary save-btn form-control" %>
-        <p></p>
       </div>
-
-
-
-      <div class="profile-pic">
-        <% if @user.photo.url.nil? %>
-          <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"%>
-        <% else %>
-          <%= cl_image_tag current_user.photo%>
-        <% end %>
-
-        <%#= t.input_field :photo, onchange: 'this.form.submit();' %>
-        <%#= t.input_field :photo, as: :hidden %>
-
-      </div>
-
     </div>
-  <% end %>
+  </div>
 </div>
 
 
-
+<%= javascript_pack_tag 'settings_video' %>
 
