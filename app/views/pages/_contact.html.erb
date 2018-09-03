@@ -32,11 +32,11 @@
             <i class="fas fa-times-circle"></i>
           <% end %>
           <div class="container">
-            <div class="modal-container">
+            <div class="modal-container modal-flex">
               <% if contact.photo.url.nil? %>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar profile dropdown-toggle img-circle" width=150>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar profile dropdown-toggle img-circle modal-picture" width=150>
               <% else %>
-                <%= cl_image_tag contact.photo, class: "profile avatar dropdown-toggle img-circle", width:150%>
+                <%= cl_image_tag contact.photo, class: "profile avatar dropdown-toggle img-circle modal-picture", width:150%>
               <% end %>
               <div class="modal-text">
                 <h4 class="modal-title" id="myModalLabel">Calling</h4>
