@@ -5,7 +5,7 @@
         <% if @user.photo.url.nil? %>
           <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png", class: "img-circle img-profile"%>
         <% else %>
-          <%= cl_image_tag @user.photo, class: "img-circle"%>
+          <%= cl_image_tag @user.photo, class: "img-circle img-profile"%>
         <% end %>
       </div>
     </div>
