@@ -42,6 +42,6 @@ Rails.application.routes.draw do
   patch '/users/:id', to: 'users#update'
   delete '/users/:id', to: 'users#destroy'
 
-  resources :connections, only: [:create, :new]
+  resources :connections, only: [:create, :new, :destroy]
   #get '/add_contact', to: 'connections#create'
 end

@@ -6,7 +6,8 @@ a:hover {
   display: flex;
   justify-content: space-between;
   a {
-    align-self: flex-end;
+    align-self: center;
+    margin-top: 19px;
   }
 }
 
@@ -143,6 +144,19 @@ a:hover {
 .contacts {
   height: 570px;
   overflow: scroll;
+}
+
+.close {
+  margin-right: 8px;
+  margin-top: -46px;
+  float: right;
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1;
+  color: #F55E4F;
+  text-shadow: 0 1px 0 #000;
+  opacity: 0.8;
+  filter: alpha(opacity=20);
 }
 
 

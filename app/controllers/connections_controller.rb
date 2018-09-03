@@ -15,4 +15,10 @@ class ConnectionsController < ApplicationController
 
     end
   end
+
+  def destroy
+    connection = current_user.connections.find_by(contact_id: params[:id].to_i)
+    connection.destroy
+    redirect_to root_path
+  end
 end
