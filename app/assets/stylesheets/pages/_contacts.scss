@@ -100,6 +100,8 @@ a:hover {
   align-items: center;
 }
 
+// Modal
+
 .modal-header {
   border-bottom: 0px;
   i {
@@ -109,6 +111,7 @@ a:hover {
 
 .modal-color {
   background-color: $card-background;
+  min-width: 296px;
 }
 
 .vertical-alignment-helper {
@@ -141,6 +144,20 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+
+.modal-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1100px) {
+    .modal-picture {
+      width: 50px;
+    }
+}
+
+
+// Contact
 
 .contact {
   color: white;

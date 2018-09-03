@@ -7,25 +7,24 @@
         <%= t.input :last_name %>
         <%= t.input :password %>
         <%= t.input :photo %>
-
+        <div class="small-profile-pic hidden-md hidden-lg">
+          <% if @user.photo.url.nil? %>
+            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"%>
+          <% else %>
+            <%= cl_image_tag current_user.photo%>
+          <% end %>
+        </div>
         <%= t.submit :Save, class: "btn btn-primary save-btn form-control" %>
         <p></p>
         <%= link_to "View my profile", user_path(@user), class: "btn btn-primary save-btn form-control" %>
       </div>
-
-
-      <div class="profile-pic">
+      <div class="profile-pic hidden-xs hidden-sm">
         <% if @user.photo.url.nil? %>
           <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"%>
         <% else %>
           <%= cl_image_tag current_user.photo%>
         <% end %>
-
-        <%#= t.input_field :photo, onchange: 'this.form.submit();' %>
-        <%#= t.input_field :photo, as: :hidden %>
-
       </div>
-
     </div>
   <% end %>
 </div>
