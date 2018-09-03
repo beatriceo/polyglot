@@ -1,3 +1,13 @@
+SPEECH = Speech.new(
+  creds: JSON.parse(File.read(ENV["STREAMING_CREDENTIALS"])),
+  host_lang: "en",
+  recieve_lang: "fr"
+  )
+
+while true
+  SPEECH.stream
+end
+
 class ChatRoomsController < ApplicationController
 
   def show
@@ -6,12 +16,12 @@ class ChatRoomsController < ApplicationController
 
   def create
     #  HTTP status code 200 with an empty body
-    head :no_content
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11123213213213123213"
-    puts params
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>11123213213213123213"
+
+    SPEECH.write_to_stream(params[:audio]) unless params[:audio].nil?
 
     ActionCable.server.broadcast "chat_room_#{params[:room]}", session_params
+
+    head :no_content
   end
 
   private
@@ -21,4 +31,11 @@ class ChatRoomsController < ApplicationController
     # Candidate = ICE candidates (e.g. TURN and STUN server)
     params.permit(:type, :from, :to, :sdp, :candidate, :room)
   end
+
+
+
 end
+
+
+
+

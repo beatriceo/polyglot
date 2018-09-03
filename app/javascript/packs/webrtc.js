@@ -1,3 +1,5 @@
+import AudioData from './audio';
+
 // Broadcast Types
 
 const JOIN_ROOM = "JOIN_ROOM";
@@ -110,6 +112,8 @@ const createPC = (userId, isOffer) => {
   let test = userId
   pcPeers[userId] = pc;
   pc.addStream(localstream);
+  const audio = new AudioData(currentUser, userId, chatroomId);
+
   if (isOffer) {
     pc
       .createOffer()
@@ -146,6 +150,7 @@ const createPC = (userId, isOffer) => {
     element.height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     remoteVideoContainer.appendChild(element);
     localVideo.classList.add("video-sm");
+    audio.intercept(localstream);
   };
 
   pc.oniceconnectionstatechange = event => {
