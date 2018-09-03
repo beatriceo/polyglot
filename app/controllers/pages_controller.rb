@@ -32,10 +32,25 @@ class PagesController < ApplicationController
     contact = User.find(params[:contact_id])
     request = Request.create!(chat_room: chat_room, user: contact)
     puts "Made a request to call #{contact.email}"
+
+    caller_info = nil
+    if current_user.first_name.nil? || current_user.last_name.nil?
+      caller_info = current_user.email
+    else
+      caller_info = "#{current_user.first_name} #{current_user.last_name}"
+    end
+
+    caller_photo = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+    unless current_user.photo.url.nil?
+      caller_photo = current_user.photo.url
+    end
+
     ActionCable.server.broadcast('notifications', {
       message: {
         user_id: contact.id,
-        chat_room_id: chat_room.id
+        chat_room_id: chat_room.id,
+        caller_info: caller_info,
+        caller_photo: caller_photo
       }
     })
   end

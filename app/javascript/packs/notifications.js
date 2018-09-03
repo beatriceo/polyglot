@@ -1,4 +1,5 @@
 import ActionCable from 'actioncable'
+import { triggerCalleeModalEvent } from "./application.js";
 
 // create App object with key cable == new consumer
 (function() {
@@ -19,16 +20,19 @@ App.cable.subscriptions.create({
     console.log('Connected to NotificationsChannel')
   },
   received: data => {
-    // console.log(data["message"]["user_id"])
-    // console.log(userId)
     console.log("received broadcast")
-    // console.log(data.body)
+
     if (data.head === 302 && data.body["caller"] === userId && data.path) {
       window.location.pathname = data.path
-    } else if (data["message"]["user_id"] === userId) { // Some error appears here but it is not fatal
-      console.log("TRIGGER MODAL")
+    } else if (data["message"]["user_id"] === userId) {
+
+      // DISPLAY ACCEPT BUTTON
       const acceptButton = document.getElementById('accept-button')
       acceptButton.style.display = "block"
+
+      triggerCalleeModalEvent()
+      document.getElementById('caller-name').innerHTML = data["message"]["caller_info"]
+      document.getElementById('caller-photo').src = data["message"]["caller_photo"]
 
       chatRoomId = data["message"]["chat_room_id"]
       console.log(`user with id: ${userId} needs to subscribe to chatroom ${[chatRoomId]}`)

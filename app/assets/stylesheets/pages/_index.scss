@@ -2,3 +2,18 @@
 @import "home";
 @import "contacts";
 @import "settings";
+
+.accept-call-button {
+  border-style: none;
+  padding: 0;
+  background: none;
+  color: $brand-success;
+}
+
+.flex-inline {
+  display: flex-inline;
+  justify-content: space-between;
+  .accept-call-button {
+    margin-right: 1em;
+  }
+}
