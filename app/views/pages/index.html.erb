@@ -33,11 +33,44 @@
 
 <!-- INFORMATION TO BE PASSED TO NOTIFICATIONS.JS -->
 <div id="my-user-id" data-user-id="<%= current_user.id %>"></div>
+<input type="hidden" id="caller-id" name="caller_id" value=""/>
 
-<form action="/accept_call" method="post">
-  <input type="hidden" id="chat-room-id" name="chat_room_id" value=""/>
-  <input type="submit" id="accept-button" class="btn btn-primary" id="accept-button" style="display: none;" value="ACCEPT CALL"/>
-</form>
+<!-- Modal -->
+<div class="modal fade" id="calleeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center">
+      <div class="modal-content modal-color">
+        <div class="modal-header">
+
+            <div class="modal-container">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="avatar profile dropdown-toggle img-circle modal-picture" width=150 id="caller-photo">
+              <div class="modal-text">
+                <h4>
+                  <strong id=caller-name class="text-color">
+                    SOMEONE
+                  </strong>
+                </h4>
+                <h4 class="modal-title text-color" id="myModalLabel">is calling</h4>
+
+                <div class="flex-inline">
+                  <form action="/accept_call" method="post">
+                    <input type="hidden" id="chat-room-id" name="chat_room_id" value=""/>
+                    <button type="submit" id="accept-button" class="accept-call-button">
+                      <i class="fas fa-check-circle"></i>
+                    </button>
+                  </form>
+                  <%= link_to "#", class:"pull-right", 'data-dismiss':"modal", 'data-target':"#calleeModal" do  %>
+                    <i class="fas fa-times-circle"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= javascript_pack_tag 'notifications' %>
 <%= javascript_pack_tag 'local_video' %>

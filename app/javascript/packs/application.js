@@ -36,3 +36,8 @@ if (contactsPage) {
   removeActiveClass(contacts);
 }
 
+const triggerCalleeModalEvent = () => {
+  $("#calleeModal").modal('show');
+}
+
+export { triggerCalleeModalEvent }
