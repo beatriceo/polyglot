@@ -12,11 +12,67 @@ class PagesController < ApplicationController
   def home
   end
 
+  def translate
+    require 'google/cloud/translate'
+
+    keyfile = ENV["TRANSLATION_CREDENTIALS"]
+    creds = Google::Cloud::Translate::Credentials.new(keyfile)
+
+    translate = Google::Cloud::Translate.new(
+      project_id: ENV["PROJECT_ID"],
+      credentials: creds
+    )
+    original = params[:original]
+    target = params[:target]
+    text = params[:text]
+    translation = translate.translate(text, { from: original, to: target })
+    translation.text.gsub!("&#39;", "'")
+    ActionCable.server.broadcast "chat_room_#{params[:chat_room_id]}", {
+      translation: translation,
+      input: params[:input]
+    }
+  end
+
 
   def cable_testing
     chatroom = 'chat_room_' + params[:chat_room_id]
     puts params
-    ActionCable.server.broadcast(chatroom, { message: 'test' })
+    user_info = {}
+
+    if current_user.first_name.nil? || current_user.last_name.nil?
+      user_info[:name] = current_user.email
+    else
+      user_info[:name] = "#{current_user.first_name} #{current_user.last_name}"
+    end
+
+    ActionCable.server.broadcast(chatroom, {
+      chat_message: {
+        message: 'test',
+        user_info: user_info,
+        time_stamp: Time.now }
+      })
+    head :ok
+  end
+
+
+  def send_message
+    puts params
+    chatroom = 'chat_room_' + params[:chat_room_id]
+    puts params
+    user_info = {}
+
+    if current_user.first_name.nil? || current_user.last_name.nil?
+      user_info[:name] = current_user.email
+    else
+      user_info[:name] = "#{current_user.first_name} #{current_user.last_name}"
+    end
+
+    ActionCable.server.broadcast(chatroom, {
+      chat_message: {
+        message: params[:message],
+        user_info: user_info,
+        time_stamp: Time.now.strftime("%H:%M") }
+      })
     head :ok
   end
 

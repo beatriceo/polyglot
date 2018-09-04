@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :chat_rooms, only: [ :show ] do
     # testing action cable
     post '/cable_testing', to: 'pages#cable_testing'
+    post '/send_message', to: 'pages#send_message'
+    post '/translate', to: 'pages#translate'
   end
 
   mount ActionCable.server, at: '/cable'

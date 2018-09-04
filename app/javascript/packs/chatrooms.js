@@ -19,18 +19,46 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
   connected: () => {
   },
   received: data => {
-    console.log(data)
+    if (data["chat_message"]) {
+      const chatMessage = data["chat_message"]
+      const messagesContainer = document.getElementById('messages-container')
+      const message = document.createElement("p")
+      message.innerText = `${chatMessage["time_stamp"]} ${chatMessage["user_info"]["name"]}: ${chatMessage["message"]}`
+      messagesContainer.appendChild(message)
+    } else if (data["translation"]) {
+      if (data["input"] == 1) {
+        document.getElementById('language-2-input').value = data["translation"].text
+      } else {
+        document.getElementById('language-1-input').value = data["translation"].text
+      }
+    } else {
+      console.log(data)
+    }
   }
 })
 
 // Testing ActionCable
-const testBtn = document.getElementById('test-btn')
-testBtn.addEventListener('click', event => {
-  fetch(`/chat_rooms/${chatroomId}/cable_testing` , {
-    method: 'POST',
-    body: JSON.stringify({})
-  })
-})
+// const testBtn = document.getElementById('test-btn')
+// testBtn.addEventListener('click', event => {
+//   fetch(`/chat_rooms/${chatroomId}/cable_testing` , {
+//     method: 'POST',
+//     body: JSON.stringify({})
+//   })
+// })
 
+
+const sendBtn = document.getElementById('send-btn')
+sendBtn.addEventListener('click', event => {
+  const chatInput = document.getElementById('chat-input')
+  if (chatInput && chatInput.value != chatInput.value.match(/^\s*$/g)) {
+    console.log(chatInput.value)
+    fetch(`/chat_rooms/${chatroomId}/send_message` , {
+      method: 'POST',
+      body: JSON.stringify({message: chatInput.value}),
+      headers: { "content-type": "application/json", "X-CSRF-Token": document.querySelector('meta[name=csrf-token]').content }
+    })
+  }
+  chatInput.value = ""
+})
 
 
