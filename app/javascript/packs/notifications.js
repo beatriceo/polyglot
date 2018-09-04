@@ -1,5 +1,9 @@
 import ActionCable from 'actioncable'
-import { triggerCalleeModalEvent } from "./application.js";
+// import { triggerCalleeModalEvent } from "./application";
+
+const triggerCalleeModalEvent = () => {
+  $("#calleeModal").modal('show');
+}
 
 // create App object with key cable == new consumer
 (function() {
