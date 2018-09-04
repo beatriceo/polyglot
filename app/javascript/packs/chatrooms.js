@@ -14,28 +14,44 @@ const userId = document.getElementById('current-user').innerText
 
 // create subsciptions
 App['chatroom' + chatroomId] = App.cable.subscriptions.create({
-  channel: 'ChatRoomsChannel',
-  room: chatroomId
-}, {
-  connected: () => {
-  },
-  received: data => {
-    if (data["chat_message"]) {
-      const chatMessage = data["chat_message"]
-      const messagesContainer = document.getElementById('messages-container')
-      const message = document.createElement("p")
-      message.innerText = `${chatMessage["time_stamp"]} ${chatMessage["user_info"]["name"]}: ${chatMessage["message"]}`
-      messagesContainer.appendChild(message)
-    } else if (data["translation"] && data["userId"] == userId) {
-      if (data["input"] == 1) {
-        document.getElementById('language-2-input').value = data["translation"].text
+    channel: 'ChatRoomsChannel',
+    room: chatroomId
+  }, {
+    connected: () => {},
+    received: data => {
+      if (data["chat_message"]) {
+        const chatMessage = data["chat_message"]
+        const messagesContainer = document.getElementById('messages-container')
+        const message = document.createElement("p")
+        message.innerText = `${chatMessage["time_stamp"]} ${chatMessage["user_info"]["name"]}: ${chatMessage["message"]}`
+        messagesContainer.appendChild(message)
+      } else if (data["translation"] && data["userId"] == userId) {
+        if (data["input"] == 1) {
+          document.getElementById('language-2-input').value = data["translation"].text
+        } else {
+          document.getElementById('language-1-input').value = data["translation"].text
+        }
       } else {
-        document.getElementById('language-1-input').value = data["translation"].text
+        // console.log(data)
       }
-    } else {
-      // console.log(data)
+      if (data.hangUp) {
+        document.location.pathname = '/contacts'
+      }
+    },
+    disconnected: () => {
+      document.location.pathname = '/contacts'
     }
-  }
+})
+
+const hangUpIcon = document.querySelector('.fa-hand-paper')
+hangUpIcon.addEventListener('click', event => {
+  fetch(`/chat_rooms/${chatroomId}`, {
+    method: 'DELETE',
+    headers: {
+      'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content
+    }
+  })
+  document.location.pathname = '/contacts'
 })
 
 // Testing ActionCable
