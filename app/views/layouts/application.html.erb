@@ -20,7 +20,7 @@
     <%= render 'shared/navbar' unless params["action"] == "home" || params["action"] == "new" || params["action"] == "call" %>
     <%= render 'shared/flashes' %>
     <%= yield %>
-    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>
