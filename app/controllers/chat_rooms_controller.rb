@@ -1,7 +1,19 @@
 class ChatRoomsController < ApplicationController
 
   def show
+    require "google/cloud/translate"
+
     @chat_room = ChatRoom.find(params[:id])
+
+    keyfile = ENV['TRANSLATION_CREDENTIALS']
+    creds = Google::Cloud::Translate::Credentials.new(keyfile)
+
+    translate = Google::Cloud::Translate.new(
+      project_id: ENV["PROJECT_ID"],
+      credentials: creds
+    )
+
+  @languages = translate.languages("en")
   end
 
   def create
