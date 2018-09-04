@@ -1,3 +1,4 @@
+import NodeSocket from './nodeserver';
 // Broadcast Types
 
 const JOIN_ROOM = "JOIN_ROOM";
@@ -12,6 +13,7 @@ let remoteVideoContainer;
 // Objects
 let pcPeers = {}; // peer connection
 let localstream;
+let nodeSocket = new NodeSocket("http://localhost:1337");
 
 window.onload = () => {
   currentUser = document.getElementById("current-user").innerHTML;
@@ -33,7 +35,9 @@ document.onreadystatechange = async () => {
 
       localstream = stream;
       localVideo.srcObject = stream
+      nodeSocket.grabAudio(stream);
       localVideo.muted = true
+
     } catch (e) { console.error(e); }
   }
 };
