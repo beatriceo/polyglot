@@ -19,17 +19,18 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
   connected: () => {
   },
   received: data => {
+    console.log(data)
   }
 })
 
 // Testing ActionCable
-// const testBtn = document.getElementById('test-btn')
-// testBtn.addEventListener('click', event => {
-//   fetch(`/chat_rooms/${chatroomId}/cable_testing` , {
-//     method: 'POST',
-//     body: JSON.stringify({})
-//   })
-// })
+const testBtn = document.getElementById('test-btn')
+testBtn.addEventListener('click', event => {
+  fetch(`/chat_rooms/${chatroomId}/cable_testing` , {
+    method: 'POST',
+    body: JSON.stringify({})
+  })
+})
 
 
 
