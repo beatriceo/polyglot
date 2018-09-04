@@ -19,8 +19,24 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
   connected: () => {
   },
   received: data => {
-    console.log(data)
+    if (data.hangUp) {
+      document.location.pathname = '/contacts'
+    }
+  },
+  disconnected: () => {
+    document.location.pathname = '/contacts'
   }
+})
+
+const hangUpIcon = document.querySelector('.fa-hand-paper')
+hangUpIcon.addEventListener('click', event => {
+  fetch(`/chat_rooms/${chatroomId}`, {
+    method: 'DELETE',
+    headers: {
+      'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content
+    }
+  })
+  document.location.pathname = '/contacts'
 })
 
 // Testing ActionCable
