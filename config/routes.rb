@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   post '/chat_rooms/chat_room_sessions', to: 'chat_rooms#create'
 
-  resources :chat_rooms, only: [ :show ] do
+  resources :chat_rooms, only: [ :show, :destroy ] do
     # testing action cable
     post '/cable_testing', to: 'pages#cable_testing'
   end

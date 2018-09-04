@@ -14,6 +14,13 @@ class ChatRoomsController < ApplicationController
     ActionCable.server.broadcast "chat_room_#{params[:room]}", session_params
   end
 
+  def destroy
+    # chat_room = ChatRoom.find(params[:id])
+    # chat_room.destroy
+    ActionCable.server.broadcast "chat_room_#{params[:id]}", { hangUp: true }
+    head :ok
+  end
+
   private
 
   def session_params

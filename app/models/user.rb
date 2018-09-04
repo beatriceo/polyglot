@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :chat_rooms, through: :chat_room_participations
   has_many :requests
 
+  validates :email, uniqueness: true
+
   mount_uploader :photo, PhotoUploader
 
   def contacts
