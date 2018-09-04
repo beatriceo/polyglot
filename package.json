@@ -6,7 +6,8 @@
     "actioncable": "^5.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "bootstrap": "3",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "typed.js": "^2.0.9"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
