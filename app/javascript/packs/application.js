@@ -3,6 +3,9 @@ import ActionCable from 'actioncable'
 
 import { triggerModalEvent } from "../components/modal.js";
 
+import { loadDynamicBannerText } from '../components/banner';
+loadDynamicBannerText();
+
 triggerModalEvent();
 
 const settingsPage = document.getElementById('settings-page');
