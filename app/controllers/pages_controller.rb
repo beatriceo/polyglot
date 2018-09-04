@@ -29,7 +29,8 @@ class PagesController < ApplicationController
     translation.text.gsub!("&#39;", "'")
     ActionCable.server.broadcast "chat_room_#{params[:chat_room_id]}", {
       translation: translation,
-      input: params[:input]
+      input: params[:input],
+      userId: current_user.id
     }
   end
 

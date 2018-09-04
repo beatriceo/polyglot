@@ -10,6 +10,7 @@ import ActionCable from 'actioncable'
 
 // find chatroom id
 const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
+const userId = document.getElementById('current-user').innerText
 
 // create subsciptions
 App['chatroom' + chatroomId] = App.cable.subscriptions.create({
@@ -25,14 +26,14 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
       const message = document.createElement("p")
       message.innerText = `${chatMessage["time_stamp"]} ${chatMessage["user_info"]["name"]}: ${chatMessage["message"]}`
       messagesContainer.appendChild(message)
-    } else if (data["translation"]) {
+    } else if (data["translation"] && data["userId"] == userId) {
       if (data["input"] == 1) {
         document.getElementById('language-2-input').value = data["translation"].text
       } else {
         document.getElementById('language-1-input').value = data["translation"].text
       }
     } else {
-      console.log(data)
+      // console.log(data)
     }
   }
 })
