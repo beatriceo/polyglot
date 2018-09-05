@@ -1,4 +1,5 @@
 // Broadcast Types
+import FileTransfer from './file_transfer';
 
 const JOIN_ROOM = "JOIN_ROOM";
 const EXCHANGE = "EXCHANGE";
@@ -12,11 +13,13 @@ let remoteVideoContainer;
 // Objects
 let pcPeers = {}; // peer connection
 let localstream;
+let ft;
 
 window.onload = () => {
   currentUser = document.getElementById("current-user").innerHTML;
   localVideo = document.getElementById("local-video");
   remoteVideoContainer = document.getElementById("remote-video-container");
+  ft = new FileTransfer();
 };
 
 // Ice Credentials
