@@ -4,6 +4,11 @@
 
 <div id="chatroom-hook" data-chatroom-id='<%= @chat_room.id %>'></div>
 
+
+<!-- <div class="row">
+  <div class="col-xs-12 col-sm-6 col-lg-4"></div>
+  <div class="col-xs-12 col-sm-6 col-lg-4"></div>
+</div> -->
 <div class="call-container">
   <div id="remote-video-container">
     <div id="video_overlays">
@@ -13,23 +18,17 @@
       <i class="far fa-hand-paper hand"></i>
   </div>
 
-  <div class="translate-container">
-
-  </div>
   <div class="messages-container-container">
-    <div id="messages-container" style="color: white;">
+    <div id="messages-container">
     </div>
-
-    <div class="input-group mb-3">
+    <div class="chat">
       <select id="language-1" class="input-field-text-black input-dropdown form-control">
         <% @languages.each do |language| %>
           <option value="<%= language.code %>"><%= language.name %></option>
         <% end %>
       </select>
-      <input type="text" class="form-control" name="chat-input" id="chat-input" value="" aria-describedby="basic-addon2">
-      <div class="input-group-append">
-        <button class="btn btn-primary" id="send-btn" type="submit" remote: true>Send</button>
-      </div>
+      <input type="text" class="form-control" name="chat-input" id="chat-input" value="">
+      <button class="btn btn-primary" id="send-btn" type="submit" remote: true>Send</button>
     </div>
   </div>
 </div>

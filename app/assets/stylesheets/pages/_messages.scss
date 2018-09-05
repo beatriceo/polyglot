@@ -1,0 +1,19 @@
+.messages-container-container {
+  background-color: $card-background;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .chat {
+    position: absolute;
+    bottom: 10px;
+  }
+}
+
+#messages-container {
+  overflow: scroll;
+  height: 80%;
+  padding: 10px;
+  .message {
+    color: white;
+  }
+}

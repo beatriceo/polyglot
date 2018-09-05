@@ -1,5 +1,5 @@
 import ActionCable from 'actioncable'
-
+// import { scrollLastMessageIntoView } from './chatrooms'
 // create App object with key cable == new cosumer
 (function() {
   window.App || (window.App = {});
@@ -24,11 +24,20 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
         const chatMessage = data["chat_message"]
         const message = `${chatMessage["message"]}`
         const messagesContainer = document.getElementById('messages-container')
+
+
+        const messageDiv = document.createElement("div")
+        const photo = document.createElement("img")
+        photo.src = chatMessage["photo_url"]
+
+        // messageDiv.appendChild(photo)
+
         const messageElement = document.createElement("p")
+        messageElement.classList.add("message")
         messageElement.innerText = message
         messagesContainer.appendChild(messageElement)
-      }
-      else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
+
+      } else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
         const chatMessage = data["chat_message"]
         const target = document.getElementById('language-1').value
 
@@ -51,9 +60,11 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
         }
       } else if (data["translated_message"] && data["userId"] == userId) {
           const messagesContainer = document.getElementById('messages-container')
-          const message = document.createElement("p")
-          message.innerText = data["translated_message"]
-          messagesContainer.appendChild(message)
+          const messageElement = document.createElement("p")
+          messageElement.classList.add("message")
+          messageElement.innerText = data["translated_message"]
+          messagesContainer.appendChild(messageElement)
+          scrollLastMessageIntoView();
       } else {
         // console.log(data)
       }
