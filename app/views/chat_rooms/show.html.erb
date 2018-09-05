@@ -1,24 +1,5 @@
 <!-- <button id="test-btn" class="btn btn-primary">Test Connection</button> -->
 
-<div>
-  <select id="language-1" class="input-field-text-black input-dropdown form-control">
-    <% @languages.each do |language| %>
-      <option value="<%= language.code %>"><%= language.name %></option>
-    <% end %>
-  </select>
-  <form id="lang-1">
-    <input type="text" class="form-control" name="language-1-input" id="language-1-input" value="" aria-describedby="basic-addon2">
-  </form>
-  <select id="language-2" class="input-field-text-black input-dropdown form-control">
-    <% @languages.each do |language| %>
-      <option value="<%= language.code %>"><%= language.name %></option>
-    <% end %>
-  </select>
-  <form id="lang-2">
-    <input type="text" class="form-control" name="language-2-input" id="language-2-input" value="" aria-describedby="basic-addon2">
-  </form>
-</div>
-
 <div id="join-btn" data-room="<%= @chat_room.id %>"></div>
 
 <div id="chatroom-hook" data-chatroom-id='<%= @chat_room.id %>'></div>
@@ -40,6 +21,11 @@
     </div>
 
     <div class="input-group mb-3">
+      <select id="language-1" class="input-field-text-black input-dropdown form-control">
+        <% @languages.each do |language| %>
+          <option value="<%= language.code %>"><%= language.name %></option>
+        <% end %>
+      </select>
       <input type="text" class="form-control" name="chat-input" id="chat-input" value="" aria-describedby="basic-addon2">
       <div class="input-group-append">
         <button class="btn btn-primary" id="send-btn" type="submit" remote: true>Send</button>
