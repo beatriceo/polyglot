@@ -13,7 +13,7 @@ class ChatRoomsController < ApplicationController
       credentials: creds
     )
 
-  @languages = translate.languages("en")
+    @languages = translate.languages("en")
   end
 
   def create

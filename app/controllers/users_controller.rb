@@ -28,9 +28,26 @@ class UsersController < ApplicationController
 
   def setting
     @user = current_user
+    require "google/cloud/translate"
+
+    keyfile = ENV['TRANSLATION_CREDENTIALS']
+    creds = Google::Cloud::Translate::Credentials.new(keyfile)
+
+    translate = Google::Cloud::Translate.new(
+      project_id: ENV["PROJECT_ID"],
+      credentials: creds
+    )
+
+    @languages = translate.languages("en")
   end
 
-
+  def update_setting
+    current_user.update(user_params)
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    puts current_user.language
+    current_user.save
+    redirect_to setting_path
+  end
 
   private
 

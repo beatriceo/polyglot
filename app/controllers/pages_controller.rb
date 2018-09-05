@@ -55,6 +55,35 @@ class PagesController < ApplicationController
     head :ok
   end
 
+  def translate_message
+    require 'google/cloud/translate'
+
+    keyfile = ENV["TRANSLATION_CREDENTIALS"]
+    creds = Google::Cloud::Translate::Credentials.new(keyfile)
+
+    translate = Google::Cloud::Translate.new(
+      project_id: ENV["PROJECT_ID"],
+      credentials: creds
+    )
+    target = params[:target]
+    message = params[:message]
+    userId = params[:userId]
+
+    detection = translate.detect(message)
+    original = detection.language
+    translated_message = message
+
+    unless original == target
+      translation = translate.translate(message, { from: original, to: target })
+      translated_message = translation.text.gsub("&#39;", "'")
+    end
+
+    ActionCable.server.broadcast "chat_room_#{params[:chat_room_id]}", {
+      translated_message: translated_message,
+      userId: userId
+    }
+  end
+
 
   def send_message
     puts params
@@ -72,7 +101,9 @@ class PagesController < ApplicationController
       chat_message: {
         message: params[:message],
         user_info: user_info,
-        time_stamp: Time.now.strftime("%H:%M") }
+        time_stamp: Time.now.strftime("%H:%M"),
+        userId: current_user.id
+        }
       })
     head :ok
   end

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/contacts', to: 'pages#index'
   get '/setting', to: 'users#setting'
+  patch '/setting', to: 'users#update_setting', as: 'update_setting'
   post '/sessions', to: 'video_sessions#create'
 
   post '/chat_rooms/chat_room_sessions', to: 'chat_rooms#create'
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     post '/cable_testing', to: 'pages#cable_testing'
     post '/send_message', to: 'pages#send_message'
     post '/translate', to: 'pages#translate'
+    post '/translate_message', to: 'pages#translate_message'
   end
 
   mount ActionCable.server, at: '/cable'
