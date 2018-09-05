@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/contacts', to: 'pages#index'
   get '/setting', to: 'users#setting'
+  patch '/setting', to: 'users#update_setting', as: 'update_setting'
   post '/sessions', to: 'video_sessions#create'
 
   post '/chat_rooms/chat_room_sessions', to: 'chat_rooms#create'
