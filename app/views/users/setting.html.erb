@@ -1,47 +1,10 @@
 <div id="settings-page"></div>
 
-<% languages = [
-  "Afrikaans (South Africa)", "Amharic (Ethiopia)", "Armenian (Armenia)",
-  "Azerbaijani (Azerbaijan)", "Indonesian (Indonesia)", "Malay (Malaysia)",
-  "Bengali (Bangladesh)", "Bengali (India)", "Catalan (Spain)",
-  "Czech (Czech Republic)", "Danish (Denmark)", "German (Germany)",
-  "English (Australia)", "English (Canada)", "English (Ghana)",
-  "English (United Kingdom)", "English (India)", "English (Ireland)",
-  "English (Kenya)", "English (New Zealand)", "English (Nigeria)",
-  "English (Philippines)", "English (South Africa)", "English (Tanzania)",
-  "English (United States)", "Spanish (Argentina)", "Spanish (Bolivia)",
-  "Spanish (Chile)", "Spanish (Colombia)", "Spanish (Costa Rica)",
-  "Spanish (Ecuador)", "Spanish (El Salvador)", "Spanish (Spain)",
-  "Spanish (United States)", "Spanish (Guatemala)", "Spanish (Honduras)",
-  "Spanish (Mexico)", "Spanish (Nicaragua)", "Spanish (Panama)",
-  "Spanish (Paraguay)", "Spanish (Peru)", "Spanish (Puerto Rico)",
-  "Spanish (Dominican Republic)", "Spanish (Uruguay)", "Spanish (Venezuela)",
-  "Basque (Spain)", "Filipino (Philippines)", "French (Canada)",
-  "French (France)", "Galician (Spain)", "Georgian (Georgia)",
-  "Gujarati (India)", "Croatian (Croatia)", "Zulu (South Africa)",
-  "Icelandic (Iceland)", "Italian (Italy)", "Javanese (Indonesia)",
-  "Kannada (India)", "Khmer (Cambodia)", "Lao (Laos)",
-  "Latvian (Latvia)", "Lithuanian (Lithuania)", "Hungarian (Hungary)",
-  "Malayalam (India)", "Marathi (India)", "Dutch (Netherlands)",
-  "Nepali (Nepal)", "Norwegian Bokmål (Norway)", "Polish (Poland)",
-  "Portuguese (Brazil)", "Portuguese (Portugal)", "Romanian (Romania)",
-  "Sinhala (Sri Lanka)", "Slovak (Slovakia)", "Slovenian (Slovenia)",
-  "Sundanese (Indonesia)", "Swahili (Tanzania)", "Swahili (Kenya)",
-  "Finnish (Finland)", "Swedish (Sweden)", "Tamil (India)",
-  "Tamil (Singapore)", "Tamil (Sri Lanka)", "Tamil (Malaysia)",
-  "Telugu (India)", "Vietnamese (Vietnam)", "Turkish (Turkey)",
-  "Urdu (Pakistan)", "Urdu (India)", "Greek (Greece)",
-  "Bulgarian (Bulgaria)", "Russian (Russia)", "Serbian (Serbia)",
-  "Ukrainian (Ukraine)", "Hebrew (Israel)", "Arabic (Israel)",
-  "Arabic (Jordan)", "Arabic (United Arab Emirates)", "Arabic (Bahrain)",
-  "Arabic (Algeria)", "Arabic (Saudi Arabia)", "Arabic (Iraq)",
-  "Arabic (Kuwait)", "Arabic (Morocco)", "Arabic (Tunisia)",
-  "Arabic (Oman)", "Arabic (Qatar)", "Arabic (Lebanon)",
-  "Arabic (Egypt)", "Persian (Iran)", "Hindi (India)",
-  "Thai (Thailand)", "Korean (South Korea)", "Chinese, Mandarin (Traditional, Taiwan)",
-  "Chinese, Cantonese (Traditional, Hong Kong)", "Japanese (Japan)",
-  "Chinese, Mandarin (Simplified, Hong Kong)",
-  "Chinese, Mandarin (Simplified, China)" ]%>
+<% language_names = [] %>
+
+<% @languages.each do |language| %>
+  <% language_names << language.name %>
+<% end %>
 
 <% fonts = [
     "Arial",
@@ -56,11 +19,11 @@
         <div class="settings">
           <h2>Settings</h2>
           <div>
-            <%= simple_form_for(@user) do |t| %>
+            <%= simple_form_for(current_user, url: update_setting_path) do |t| %>
               <div>
                 <div class="card card-form card-form-no-hover">
                   <%= t.label :language, class:'padding-right no-margin font-weight-normal' %>
-                  <%= t.input_field :language, collection: languages.sort, class:'input-field-text-black input-dropdown form-control' %>
+                  <%= t.input_field :language, collection: language_names, class:'input-field-text-black input-dropdown form-control', include_blank: false %>
                 </div>
                 <div class="card card-form card-form-no-hover">
                   <%= t.label :caption_font, class:'padding-right no-margin font-weight-normal' %>
@@ -77,11 +40,11 @@
                     <span class="slider round"></span>
                   </label>
                 </div>
-
-                <%= link_to "Save", contacts_path, class: "btn btn-primary save-btn form-control" %>
+                <%= t.button :submit, value: 'Save', class: "btn btn-primary save-btn form-control" %>
                 <p></p>
               </div>
             <% end %>
+                <%#= link_to "Save", update_setting_path, method: :patch, class: "btn btn-primary save-btn form-control" %>
           </div>
         </div>
       </div>

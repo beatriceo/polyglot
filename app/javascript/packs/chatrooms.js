@@ -11,6 +11,7 @@ import ActionCable from 'actioncable'
 // find chatroom id
 const chatroomId = document.getElementById('chatroom-hook').dataset["chatroomId"]
 const userId = document.getElementById('current-user').innerText
+console.log(userId)
 
 // create subsciptions
 App['chatroom' + chatroomId] = App.cable.subscriptions.create({
@@ -19,18 +20,40 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
   }, {
     connected: () => {},
     received: data => {
-      if (data["chat_message"]) {
+      if (data["chat_message"] && data["chat_message"]["userId"] == userId) {
         const chatMessage = data["chat_message"]
+        const message = `${chatMessage["message"]}`
         const messagesContainer = document.getElementById('messages-container')
-        const message = document.createElement("p")
-        message.innerText = `${chatMessage["time_stamp"]} ${chatMessage["user_info"]["name"]}: ${chatMessage["message"]}`
-        messagesContainer.appendChild(message)
+        const messageElement = document.createElement("p")
+        messageElement.innerText = message
+        messagesContainer.appendChild(messageElement)
+      }
+      else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
+        const chatMessage = data["chat_message"]
+        const target = document.getElementById('language-1').value
+
+        const message = `${chatMessage["message"]}`
+
+        fetch(`/chat_rooms/${chatroomId}/translate_message` , {
+          method: 'POST',
+          body: JSON.stringify({
+            message: message,
+            target: target,
+            userId: userId
+          }),
+          headers: { "content-type": "application/json", "X-CSRF-Token": document.querySelector('meta[name=csrf-token]').content }
+        })
       } else if (data["translation"] && data["userId"] == userId) {
         if (data["input"] == 1) {
           document.getElementById('language-2-input').value = data["translation"].text
         } else {
           document.getElementById('language-1-input').value = data["translation"].text
         }
+      } else if (data["translated_message"] && data["userId"] == userId) {
+          const messagesContainer = document.getElementById('messages-container')
+          const message = document.createElement("p")
+          message.innerText = data["translated_message"]
+          messagesContainer.appendChild(message)
       } else {
         // console.log(data)
       }
@@ -68,10 +91,9 @@ const sendBtn = document.getElementById('send-btn')
 sendBtn.addEventListener('click', event => {
   const chatInput = document.getElementById('chat-input')
   if (chatInput && chatInput.value != chatInput.value.match(/^\s*$/g)) {
-    console.log(chatInput.value)
     fetch(`/chat_rooms/${chatroomId}/send_message` , {
       method: 'POST',
-      body: JSON.stringify({message: chatInput.value}),
+      body: JSON.stringify({message: chatInput.value, userId: userId}),
       headers: { "content-type": "application/json", "X-CSRF-Token": document.querySelector('meta[name=csrf-token]').content }
     })
   }
