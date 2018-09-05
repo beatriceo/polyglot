@@ -78,7 +78,7 @@ const handleLeaveSession = () => {
 
   App.session.unsubscribe();
 
-  remoteVideoContainer.innerHTML = "";
+  // remoteVideoContainer.innerHTML = "";
 
   broadcastData({
     type: REMOVE_USER,
@@ -91,8 +91,9 @@ const joinRoom = data => {
 };
 
 const removeUser = data => {
-  let video = document.getElementById(`remoteVideoContainer+${data.from}`);
-  video && video.remove();
+  remoteVideo = document.querySelector("#remote-video-container>video");
+  if (video.srcObject) video.srcObject = null;
+
   delete pcPeers[data.from];
 };
 
@@ -139,12 +140,9 @@ const createPC = (userId, isOffer) => {
   };
 
   pc.onaddstream = event => {
-    const element = document.createElement("video");
-    element.id = `remoteVideoContainer+${userId}`;  // why is the userId being interpolated?
-    element.autoplay = "autoplay";
-    element.srcObject = event.stream;
-    element.height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    remoteVideoContainer.appendChild(element);
+    const remoteVideo = document.querySelector("#remote-video-container>video");
+    remoteVideo.srcObject = event.stream;
+    remoteVideo.height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     localVideo.classList.add("video-sm");
   };
 
@@ -200,7 +198,11 @@ const exchange = data => {
   }
 };
 
-const logError = error => console.warn("Whoops! Error:", error);
+const logError = error => {
+  console.error("Whoops! Error:", error);
+  // console.info("Reloading Page...")
+  // window.reload();
+}
 
 
 const joinButton = document.getElementById("join-btn")
@@ -212,4 +214,9 @@ joinButton.addEventListener('click', event => {
 setTimeout(function() {
   joinButton.click()
 }, 5000);
+
+
+(function addReloadToWindowObject() {
+  window.__proto__.reload = () => { window.location = window.location }
+})();
 
