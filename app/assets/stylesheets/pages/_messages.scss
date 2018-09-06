@@ -11,6 +11,7 @@
 
 #messages-container {
   overflow: scroll;
+  overflow-x: hidden;
   height: 95%;
   padding: 10px;
 }
