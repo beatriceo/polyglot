@@ -4,44 +4,35 @@
 
 <div id="chatroom-hook" data-chatroom-id='<%= @chat_room.id %>'></div>
 
-
-<div class="row">
-  <div class="call-container">
-    <div class="col-xs-12 col-sm-6 col-lg-4">
-      <div id="remote-video-container">
-        <div id="video_overlays">
-          <video id="local-video" autoplay muted></video>
-        </div>
-          <video id="remote-video" autoplay></video>
-          <i class="far fa-hand-paper hand"></i>
-          <!-- <i class="far fa-phone-slash hand"></i> -->
-      </div>
+<div class="call-container">
+  <div id="remote-video-container">
+    <div id="video_overlays">
+      <video id="local-video" autoplay muted></video>
     </div>
-    <div class="col-xs-12 col-sm-6 col-lg-4 no-padding">
-      <div class="messages-container-container">
-        <div id="messages-container">
-        </div>
-        <div class="chat">
-          <div class="input-group">
-            <select id="language-1" class="form-control no-radius">
-              <% @languages.each do |language| %>
-                <option value="<%= language.code %>"><%= language.name %></option>
-              <% end %>
-            </select>
-            <span class="input-group-addon" style="width:0px; padding-left:0px; padding-right:0px; border:none;"></span>
-            <input type="text" class="form-control" name="chat-input" id="chat-input" value="">
-            <span class="input-group-btn">
-              <button class="btn btn-primary form-control" id="send-btn" type="submit" remote: true>Send</button>
-                <!-- <i class="far fa-paper-plane"></i> -->
-            </span>
-          </div>
-        </div>
+      <video id="remote-video" autoplay></video>
+      <i class="far fa-hand-paper hand"></i>
+  </div>
+
+  <div class="translate-container">
+
+  </div>
+  <div class="messages-container-container">
+    <div id="messages-container" style="color: white;">
+    </div>
+
+    <div class="input-group mb-3">
+      <select id="language-1" class="input-field-text-black input-dropdown form-control">
+        <% @languages.each do |language| %>
+          <option value="<%= language.code %>"><%= language.name %></option>
+        <% end %>
+      </select>
+      <input type="text" class="form-control" name="chat-input" id="chat-input" value="" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-primary" id="send-btn" type="submit" remote: true>Send</button>
       </div>
     </div>
   </div>
 </div>
-
-
 
 <div><span id="current-user" class="text-color" style="display:none"><%= current_user.id %></span></div>
 

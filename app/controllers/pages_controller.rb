@@ -50,9 +50,7 @@ class PagesController < ApplicationController
       chat_message: {
         message: 'test',
         user_info: user_info,
-        time_stamp: Time.now,
-        photo_url: photo_url
-        }
+        time_stamp: Time.now }
       })
     head :ok
   end
@@ -82,8 +80,7 @@ class PagesController < ApplicationController
 
     ActionCable.server.broadcast "chat_room_#{params[:chat_room_id]}", {
       translated_message: translated_message,
-      userId: userId,
-      photo_url: params[:photo_url]
+      userId: userId
     }
   end
 
@@ -93,7 +90,6 @@ class PagesController < ApplicationController
     chatroom = 'chat_room_' + params[:chat_room_id]
     puts params
     user_info = {}
-    photo_url = current_user.photo.url || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
 
     if current_user.first_name.nil? || current_user.last_name.nil?
       user_info[:name] = current_user.email
@@ -106,8 +102,7 @@ class PagesController < ApplicationController
         message: params[:message],
         user_info: user_info,
         time_stamp: Time.now.strftime("%H:%M"),
-        userId: current_user.id,
-        photo_url: photo_url
+        userId: current_user.id
         }
       })
     head :ok
