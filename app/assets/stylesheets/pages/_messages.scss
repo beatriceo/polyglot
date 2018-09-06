@@ -101,3 +101,24 @@ select:not([multiple]) {
     box-shadow: none;
   }
 }
+
+.chat-information {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-group{
+  width: 100%;
+}
+
+.form-inline{
+    width: 100%;
+}
+
+.guyisbadass{
+    width: 85%;
+}
+#chat-input {
+
+}
