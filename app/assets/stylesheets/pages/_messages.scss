@@ -10,18 +10,22 @@
   .chat {
     position: absolute;
     bottom: 100px;
-    width: 90%;
+    width: 75%;
   }
 }
 
-#messages-container {
-  overflow: scroll;
-  overflow-x: hidden;
+.information-container {
   height: 81%;
   padding: 38px;
   width: 90%;
   border-radius: 15px;
   background-color: $light-gray;
+}
+
+#messages-container {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 80%;
 }
 
 select:not([multiple]) {
@@ -119,6 +123,4 @@ select:not([multiple]) {
 .guyisbadass{
     width: 85%;
 }
-#chat-input {
 
-}
