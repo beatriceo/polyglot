@@ -220,3 +220,18 @@ setTimeout(function() {
   window.__proto__.reload = () => { window.location = window.location }
 })();
 
+
+// // have enter with JS
+// const form = document.getElementById("chat-form")
+// document.getElementById("chat-input").addEventListener("keyup", event => {
+//       if(event == "Enter"){
+//            form.submit();
+//        }
+//     });
+
+
+document.getElementById("chat-form").addEventListener("click", function(event){
+    event.preventDefault()
+});
+
+
