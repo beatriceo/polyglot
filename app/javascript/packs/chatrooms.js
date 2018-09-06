@@ -1,5 +1,5 @@
 import ActionCable from 'actioncable'
-// import { scrollLastMessageIntoView } from './chatrooms'
+
 // create App object with key cable == new cosumer
 (function() {
   window.App || (window.App = {});
@@ -24,35 +24,14 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
         const chatMessage = data["chat_message"]
         const message = `${chatMessage["message"]}`
         const messagesContainer = document.getElementById('messages-container')
-
-        // Div Settings
-        const messageDiv = document.createElement("div")
-        messageDiv.classList.add("messageDiv")
-        messageDiv.classList.add("right")
-
-        // Photo Settings
-        const photo = document.createElement("img")
-        photo.src = chatMessage["photo_url"]
-        photo.classList.add("img-circle")
-        photo.classList.add("avatar-sm")
-        photo.classList.add("margin-left")
-
-        // Text Settings
         const messageElement = document.createElement("p")
-        messageElement.classList.add("message")
-        messageElement.classList.add("no-margin")
         messageElement.innerText = message
-
-        // Add message and photo to div
-        messageDiv.appendChild(photo)
-        messageDiv.appendChild(messageElement)
-
-        // Add message to container
-        messagesContainer.appendChild(messageDiv)
-
-      } else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
+        messagesContainer.appendChild(messageElement)
+      }
+      else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
         const chatMessage = data["chat_message"]
         const target = document.getElementById('language-1').value
+
         const message = `${chatMessage["message"]}`
 
         fetch(`/chat_rooms/${chatroomId}/translate_message` , {
@@ -60,33 +39,21 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
           body: JSON.stringify({
             message: message,
             target: target,
-            userId: userId,
-            photo_url: chatMessage["photo_url"]
+            userId: userId
           }),
           headers: { "content-type": "application/json", "X-CSRF-Token": document.querySelector('meta[name=csrf-token]').content }
         })
+      } else if (data["translation"] && data["userId"] == userId) {
+        if (data["input"] == 1) {
+          document.getElementById('language-2-input').value = data["translation"].text
+        } else {
+          document.getElementById('language-1-input').value = data["translation"].text
+        }
       } else if (data["translated_message"] && data["userId"] == userId) {
           const messagesContainer = document.getElementById('messages-container')
-
-          const messageDiv = document.createElement("div")
-          messageDiv.classList.add("messageDiv")
-
-          const photo = document.createElement("img")
-          photo.src = data["photo_url"]
-          photo.classList.add("img-circle")
-          photo.classList.add("avatar-sm")
-          photo.classList.add("margin-right")
-
-          const messageElement = document.createElement("p")
-          messageElement.classList.add("message")
-          messageElement.classList.add("message")
-          messageElement.classList.add("no-margin")
-          messageElement.innerText = data["translated_message"]
-
-          messageDiv.appendChild(photo)
-          messageDiv.appendChild(messageElement)
-
-          messagesContainer.appendChild(messageDiv)
+          const message = document.createElement("p")
+          message.innerText = data["translated_message"]
+          messagesContainer.appendChild(message)
       } else {
         // console.log(data)
       }

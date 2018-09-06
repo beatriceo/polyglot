@@ -6,14 +6,6 @@ video {
 
 #remote-video-container {
   float: left;
-  i {
-    text-align: center;
-    background-color: $primary;
-    border-radius: 50%;
-    padding: 15px;
-    z-index: 999999;
-    color: white;
-  }
 }
 
 #local-video {
