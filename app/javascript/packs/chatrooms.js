@@ -49,6 +49,7 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
 
         // Add message to container
         messagesContainer.appendChild(messageDiv)
+        messagesContainer.scrollTop = div.scrollHeight
 
       } else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
         // const callerName = document.getElementById('caller-name')
@@ -75,6 +76,8 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
           }),
           headers: { "content-type": "application/json", "X-CSRF-Token": document.querySelector('meta[name=csrf-token]').content }
         })
+        const messagesContainer = document.getElementById('messages-container')
+        messagesContainer.scrollTop = div.scrollHeight
       } else if (data["translated_message"] && data["userId"] == userId) {
           const messagesContainer = document.getElementById('messages-container')
 
@@ -105,8 +108,11 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
           })
 
           messagesContainer.appendChild(messageDiv)
+          messagesContainer.scrollTop = div.scrollHeight
       } else {
         // console.log(data)
+        const messagesContainer = document.getElementById('messages-container')
+        messagesContainer.scrollTop = div.scrollHeight
       }
       if (data.hangUp) {
         document.location.pathname = '/contacts'

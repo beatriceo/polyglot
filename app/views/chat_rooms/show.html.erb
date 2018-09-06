@@ -60,6 +60,11 @@
 
 <div><span id="current-user" class="text-color" style="display:none"><%= current_user.id %></span></div>
 
+<script>
+  const div = document.getElementById('messages-container')
+  div.scrollTop = div.scrollHeight
+</script>
+
 <%= javascript_pack_tag 'chatrooms' %>
 <%= javascript_pack_tag 'webrtc' %>
 <%= javascript_pack_tag 'translate' %>
