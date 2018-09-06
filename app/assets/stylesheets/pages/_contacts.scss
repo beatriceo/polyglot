@@ -163,7 +163,9 @@ a:hover {
 .contacts {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
+
+  height: calc(100vh - 3.5em);
 }
 
 .close-location {
@@ -180,8 +182,8 @@ a:hover {
 }
 
 .contacts-list{
-  height: 90vh;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 
