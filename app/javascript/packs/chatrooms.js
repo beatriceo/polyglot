@@ -79,12 +79,20 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
 
           const messageElement = document.createElement("p")
           messageElement.classList.add("message")
-          messageElement.classList.add("message")
           messageElement.classList.add("no-margin")
           messageElement.innerText = data["translated_message"]
+          messageElement.setAttribute('data-original', `${data["original_message"]}`)
+          messageElement.setAttribute('data-translated', `${data["translated_message"]}`)
 
           messageDiv.appendChild(photo)
           messageDiv.appendChild(messageElement)
+
+          messageDiv.addEventListener('mouseover', event => {
+            messageElement.innerText = data["original_message"]
+          })
+          messageDiv.addEventListener('mouseout', event => {
+            messageElement.innerText = data["translated_message"]
+          })
 
           messagesContainer.appendChild(messageDiv)
       } else {
@@ -119,6 +127,23 @@ hangUpIcon.addEventListener('click', event => {
 //   })
 // })
 
+const originalBtn = document.getElementById('original-btn')
+originalBtn.addEventListener('click', event => {
+  originalBtn.classList.toggle('original')
+  const allMessages = document.querySelectorAll('.messageDiv:not(.right) > p')
+
+  if (originalBtn.classList.contains('original')) {
+    originalBtn.innerText = "Show Original"
+    allMessages.forEach(message => {
+      message.innerText = message.dataset.translated
+    })
+  } else {
+    originalBtn.innerText = "Show Translated"
+    allMessages.forEach(message => {
+      message.innerText = message.dataset.original
+    })
+  }
+})
 
 const sendBtn = document.getElementById('send-btn')
 sendBtn.addEventListener('click', event => {
