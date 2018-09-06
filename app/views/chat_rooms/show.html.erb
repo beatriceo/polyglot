@@ -20,6 +20,9 @@
     <div class="col-xs-12 col-sm-6 col-lg-4 no-padding">
       <div class="messages-container-container">
         <div id="messages-container">
+          <div class="hover-notice">
+            <span class="text-center"><small>Hover to see the original message</small></span>
+          </div>
         </div>
         <div class="chat">
           <div class="input-group">
@@ -29,13 +32,15 @@
               <% end %>
             </select>
             <span class="input-group-addon" style="width:0px; padding-left:0px; padding-right:0px; border:none;"></span>
-            <input type="text" class="form-control" name="chat-input" id="chat-input" value="">
+            <input type="text" class="form-control input-transparent" name="chat-input" id="chat-input" value="" placeholder="Type something...">
             <span class="input-group-btn">
-              <button class="btn btn-primary form-control" id="send-btn" type="submit" remote: true>Send</button>
+              <button class="form-control send-button" id="send-btn" type="submit" remote: true>
+                <i class="fas fa-paper-plane"></i>
+              </button>
             </span>
-            <span class="input-group-btn">
+            <!-- <span class="input-group-btn">
               <button class="btn btn-danger form-control" id="original-btn" type="submit" remote: true>Show Original</button>
-            </span>
+            </span> -->
           </div>
         </div>
       </div>

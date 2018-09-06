@@ -127,23 +127,23 @@ hangUpIcon.addEventListener('click', event => {
 //   })
 // })
 
-const originalBtn = document.getElementById('original-btn')
-originalBtn.addEventListener('click', event => {
-  originalBtn.classList.toggle('original')
-  const allMessages = document.querySelectorAll('.messageDiv:not(.right) > p')
+// const originalBtn = document.getElementById('original-btn')
+// originalBtn.addEventListener('click', event => {
+//   originalBtn.classList.toggle('original')
+//   const allMessages = document.querySelectorAll('.messageDiv:not(.right) > p')
 
-  if (originalBtn.classList.contains('original')) {
-    originalBtn.innerText = "Show Original"
-    allMessages.forEach(message => {
-      message.innerText = message.dataset.translated
-    })
-  } else {
-    originalBtn.innerText = "Show Translated"
-    allMessages.forEach(message => {
-      message.innerText = message.dataset.original
-    })
-  }
-})
+//   if (originalBtn.classList.contains('original')) {
+//     originalBtn.innerText = "Show Original"
+//     allMessages.forEach(message => {
+//       message.innerText = message.dataset.translated
+//     })
+//   } else {
+//     originalBtn.innerText = "Show Translated"
+//     allMessages.forEach(message => {
+//       message.innerText = message.dataset.original
+//     })
+//   }
+// })
 
 const sendBtn = document.getElementById('send-btn')
 sendBtn.addEventListener('click', event => {
