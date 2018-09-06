@@ -51,6 +51,16 @@ App['chatroom' + chatroomId] = App.cable.subscriptions.create({
         messagesContainer.appendChild(messageDiv)
 
       } else if (data["chat_message"] && data["chat_message"]["userId"] != userId) {
+        // const callerName = document.getElementById('caller-name')
+        // callerName.innerText = data["chat_message"]["user_info"]
+        // console.log(data["chat_message"]["user_info"]["name"])
+
+        // const photo = data["chat_message"]["photo_url"]
+        // photo.height = '20px'
+        // photo.width = '20px'
+        // const chatInfo = document.querySelector('chat-information')
+        // chatInfo.insertBefore(photo, chatInfo.firstChild)
+
         const chatMessage = data["chat_message"]
         const target = document.getElementById('language-1').value
         const message = `${chatMessage["message"]}`
