@@ -82,6 +82,7 @@ class PagesController < ApplicationController
 
     ActionCable.server.broadcast "chat_room_#{params[:chat_room_id]}", {
       translated_message: translated_message,
+      original_message: message,
       userId: userId,
       photo_url: params[:photo_url]
     }
