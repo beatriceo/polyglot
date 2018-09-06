@@ -100,3 +100,4 @@ if (acceptButton) {
     document.getElementById('chat-room-id').value = chatRoomId
   })
 }
+
