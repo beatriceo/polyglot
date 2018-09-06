@@ -81,8 +81,10 @@ App.cable.subscriptions.create({
       acceptButton.style.display = "block"
 
       triggerCalleeModalEvent()
+      const photo = document.getElementById('caller-photo');
       document.getElementById('caller-name').innerHTML = data["message"]["caller_info"]
-      document.getElementById('caller-photo').src = data["message"]["caller_photo"]
+      photo.src = data["message"]["caller_photo"];
+      photo.style.objectFit = "cover";
 
       chatRoomId = data["message"]["chat_room_id"]
       console.log(`user with id: ${userId} needs to subscribe to chatroom ${[chatRoomId]}`)
